@@ -1,0 +1,204 @@
+$ python -m ruff check src tests
+All checks passed!
+
+$ python -m pytest --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+============================= test session starts ==============================
+testpaths: tests
+collected 146 items
+
+  >> API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)
+     [PASÓ]     Abrir la raíz de la API lleva directo a la documentación Swagger.
+     [PASÓ]     La documentación Swagger (/docs) y el contrato OpenAPI se publican.
+     [PASÓ]     GET /orders/O001 regresa el pedido con su descuento y una explicación en español.
+     [PASÓ]     Un pedido que no existe responde 404 (/orders/NOPE).
+     [PASÓ]     Un pedido que no existe responde 404 (/orders/NOPE/confirm).
+     [PASÓ]     Confirmar O002 funciona; confirmarlo otra vez es un conflicto.
+     [PASÓ]     Confirmar O003 (cliente inactivo o sin artículos) son datos inválidos.
+     [PASÓ]     Confirmar O007 (cliente inactivo o sin artículos) son datos inválidos.
+     [PASÓ]     Flujo O016 hasta DELIVERED; envío sin guía da 422; cancelar O014 enviado da 409.
+     [PASÓ]     O002 se cancela con motivo; O015 se devuelve desde SHIPPED.
+     [PASÓ]     Swagger: cobrar O001 con la pasarela simulada respondiendo 'aprobado'.
+     [PASÓ]     Swagger: cobrar O002 con la pasarela simulada respondiendo 'rechazado'.
+     [PASÓ]     Swagger: cobrar O006 con la pasarela simulada respondiendo 'timeout'.
+     [PASÓ]     Swagger: cobrar O007 con la pasarela simulada respondiendo 'aprobado'.
+     [PASÓ]     Cobrar un pedido que ya está confirmado es un conflicto.
+     [PASÓ]     Si nunca se han corrido las pruebas, la API lo explica en español.
+     [PASÓ]     GET /pruebas/resultados traduce el reporte a frases que cualquiera entiende.
+     [PASÓ]     POST /pruebas/ejecutar corre pytest y responde el resumen (aquí pytest se simula).
+     [PASÓ]     Si pytest no logra generar el reporte, la API lo informa.
+     [PASÓ]     Swagger muestra el pedido O001 como texto en español, no como código.
+     [PASÓ]     Confirmar dos veces da un mensaje claro con el motivo y el estado actual.
+     [PASÓ]     Al confirmar O003 el mensaje dice exactamente por qué no se puede.
+     [PASÓ]     Al confirmar O007 el mensaje dice exactamente por qué no se puede.
+     [PASÓ]     Enviar, entregar y un pedido inexistente también responden con frases claras.
+     [PASÓ]     Si falta un dato obligatorio (la guía), se indica qué campo revisar.
+     [PASÓ]     Cobro de O001 con pasarela 'aprobado' explicado en español.
+     [PASÓ]     Cobro de O002 con pasarela 'rechazado' explicado en español.
+     [PASÓ]     Cobro de O006 con pasarela 'timeout' explicado en español.
+     [PASÓ]     Cobro de O007 con pasarela 'aprobado' explicado en español.
+     [PASÓ]     El resumen de pruebas también sale como texto con íconos y fallas explicadas.
+     [PASÓ]     POST /reiniciar devuelve los pedidos a su estado inicial sin apagar el servidor.
+     [PASÓ]     Si el pedido ya estaba guardado como cobrado, se explica y se reembolsa (no error 500).
+     [PASÓ]     El cliente lee por qué su pedido O006 tiene (o no) descuento.
+     [PASÓ]     El cliente lee por qué su pedido O005 tiene (o no) descuento.
+     [PASÓ]     El cliente lee por qué su pedido O002 tiene (o no) descuento.
+
+  >> Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv
+     [PASÓ]     CP01: cliente regular confirma pedido de $120 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP02: cliente VIP confirma pedido de $200 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP03: cliente regular confirma pedido de $150 (deuda $500, estado inicial NEW, escenario DEUDA)
+     [PASÓ]     CP04: cliente regular confirma pedido de $0 (deuda $0, estado inicial NEW, escenario TOTAL_CERO)
+     [PASÓ]     CP05: cliente regular confirma pedido de $-10 (deuda $0, estado inicial NEW, escenario TOTAL_NEGATIVO)
+     [PASÓ]     CP06: cliente VIP confirma pedido de $1000 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP07: cliente VIP confirma pedido de $0.01 (deuda $0, estado inicial NEW, escenario LIMITE)
+     [PASÓ]     CP08: cliente regular confirma pedido de $250 (deuda $0, estado inicial CONFIRMED, escenario YA_CONFIRMADO)
+     [PASÓ]     CP09: cliente VIP confirma pedido de $300 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP10: cliente regular confirma pedido de $75 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP11: cliente VIP confirma pedido de $500 (deuda $250, estado inicial NEW, escenario DEUDA)
+     [PASÓ]     CP12: cliente VIP confirma pedido de $99.99 (deuda $0, estado inicial NEW, escenario VALIDO)
+     [PASÓ]     CP13: la pasarela (mock) rechaza el pago del pedido 1.
+     [PASÓ]     CP14: un pedido guardado con COMMIT es visible después.
+     [PASÓ]     CP15: un pedido revertido con ROLLBACK no queda guardado.
+
+  >> Reglas del pedido (pruebas unitarias del dominio)
+     [PASÓ]     Un cliente VIP con pedido de $100 recibe 15% de descuento.
+     [PASÓ]     Un cliente regular con pedido de $100 NO recibe descuento.
+     [PASÓ]     Un cliente con deuda pendiente no puede confirmar su pedido.
+     [PASÓ]     Un pedido con total de $0 (cero o negativo) se rechaza.
+     [PASÓ]     Un pedido con total de $-1 (cero o negativo) se rechaza.
+     [PASÓ]     Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).
+     [PASÓ]     Un cliente regular con pedido de $200 paga el total completo.
+     [PASÓ]     Caso límite: el total más pequeño posible ($0.01) sí se acepta.
+     [PASÓ]     Caso límite: deuda exactamente de $0 NO bloquea la confirmación.
+     [PASÓ]     Si el total es inválido y además hay deuda, primero se reporta el total inválido.
+     [PASÓ]     TDD: un pedido que ya fue confirmado NO puede confirmarse otra vez.
+
+  >> Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)
+     [PASÓ]     Un pedido guardado y confirmado con COMMIT queda registrado en la base de datos.
+     [PASÓ]     Si se hace ROLLBACK, el pedido que se iba a guardar se descarta.
+     [PASÓ]     Un pedido de $250 confirmado se guarda con id=2 y conserva total y estado.
+     [PASÓ]     Lo que ya se confirmó con COMMIT no se pierde si después se hace ROLLBACK de otro cambio.
+     [PASÓ]     Restricción de unicidad: no se pueden guardar dos pedidos con el mismo id.
+     [PASÓ]     Buscar un pedido que nunca se guardó regresa vacío (no truena).
+
+  >> Seguridad: quién puede cancelar un pedido (autorización)
+     [PASÓ]     El dueño del pedido puede cancelarlo durante las primeras 24 horas (1 h de antigüedad).
+     [PASÓ]     Un usuario que NO es dueño ni administrador no puede cancelar un pedido ajeno.
+     [PASÓ]     Un pedido ENVIADO (SHIPPED) no se cancela, ni siquiera por un administrador.
+     [PASÓ]     El dueño ya no puede cancelar después de 25 horas.
+     [PASÓ]     Un ADMINISTRADOR puede cancelar el pedido NEW de otro usuario.
+     [PASÓ]     Caso límite: el dueño intenta cancelar EXACTAMENTE a las 24 horas.
+     [PASÓ]     Caso límite: al dueño le falta 1 segundo para cumplir 24 horas.
+     [PASÓ]     Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 72 h.
+     [PASÓ]     Matriz: administrador (¿dueño? sí) intenta cancelar pedido CONFIRMED de 30 h.
+     [PASÓ]     Matriz: administrador (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido CONFIRMED de 23 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 24 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? no) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? no) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Si no se pasa 'now', la política usa la hora actual del sistema.
+
+  >> Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)
+     [PASÓ]     Si la pasarela APRUEBA el pago, el servicio devuelve el importe cobrado.
+     [PASÓ]     Si la pasarela RECHAZA el pago, el servicio lanza un error.
+     [PASÓ]     Pago RECHAZADO de un pedido VIP de $200: se intentó cobrar $170 y se lanzó error.
+     [PASÓ]     Mejora de consistencia (TDD): si el pago se rechaza, el pedido NO debe quedar confirmado.
+     [PASÓ]     Si la pasarela no responde (timeout), se informa 'servicio no disponible' y no se confirma.
+     [PASÓ]     Si el cliente tiene deuda, el pedido se rechaza ANTES de intentar cobrar.
+     [PASÓ]     Un pedido con total $0 se rechaza sin intentar cobrar.
+
+  >> TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)
+     [PASÓ]     Un pedido de TechStore guardado con COMMIT se puede consultar después.
+     [PASÓ]     Con ROLLBACK el pedido no queda guardado.
+     [PASÓ]     Restricción de unicidad: no puede haber dos pedidos con el mismo id.
+     [PASÓ]     Pago APROBADO de O001 (VIP, $2100, 10 % de descuento): se cobra $1890 y se guarda.
+     [PASÓ]     Pago RECHAZADO: el pedido no se confirma y no se guarda nada.
+     [PASÓ]     La pasarela no responde (timeout).
+     [PASÓ]     Si O003 no puede confirmarse (cliente inactivo / sin artículos) NO se intenta cobrar.
+     [PASÓ]     Si O007 no puede confirmarse (cliente inactivo / sin artículos) NO se intenta cobrar.
+     [PASÓ]     Un pedido ya confirmado no se vuelve a cobrar.
+     [PASÓ]     Si la BD falla después de cobrar, se hace rollback y se REEMBOLSA (compensación).
+     [PASÓ]     Importe a cobrar del pedido O001 (total menos descuento).
+     [PASÓ]     Importe a cobrar del pedido O006 (total menos descuento).
+     [PASÓ]     Importe a cobrar del pedido O002 (total menos descuento).
+
+  >> TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)
+     [PASÓ]     R1 éxito: el pedido O008 con 20 unidades exactas sí se puede confirmar.
+     [PASÓ]     R1 error: O009 tiene 19 unidades y se intentan agregar 2 más (21).
+     [PASÓ]     R1 límite: O009 tiene 19 unidades y se agrega 1 (justo 20).
+     [PASÓ]     R1 límite: dos renglones de 10 unidades suman 20 (permitido); uno más de 1 ya no.
+     [PASÓ]     R1 error: después de confirmar ya no se pueden agregar artículos.
+     [PASÓ]     R2: pedido O001 -> VIP, total $2100, 4 unidades, sin promoción.
+     [PASÓ]     R2: pedido O006 -> total mayor a $5000, sin promoción.
+     [PASÓ]     R2: pedido O002 -> no VIP y total menor a $5000.
+     [PASÓ]     R2: pedido O005 -> promoción activa bloquea el descuento.
+     [PASÓ]     R2: pedido O010 -> total EXACTAMENTE $500 (la regla es > 500).
+     [PASÓ]     R2: pedido O011 -> VIP con solo 3 unidades (requiere 4).
+     [PASÓ]     R2 límite: un VIP con $5,500 y 5 unidades cumple AMBAS reglas.
+     [PASÓ]     R2 límite: $500 exactos NO superan el mínimo; 4 unidades exactas SÍ cumplen el mínimo.
+     [PASÓ]     R2: la combinación OR detecta si el pedido tiene algún descuento.
+     [PASÓ]     R2: evaluar un descuento no cambia nada del pedido (solo consulta).
+     [PASÓ]     R3 éxito: O016 pasa por DRAFT -> CONFIRMED -> SHIPPED -> DELIVERED.
+     [PASÓ]     R3 error: O014 ya fue enviado y se intenta cancelar.
+     [PASÓ]     R3 límite: O013 se confirma dos veces; la segunda se rechaza.
+     [PASÓ]     R3 error: enviar O012 con guía vacía ('').
+     [PASÓ]     R3 error: enviar O012 con guía vacía ('   ').
+     [PASÓ]     R3 error: no se confirma O003 (cliente inactivo).
+     [PASÓ]     R3 error: no se confirma O007 (pedido sin artículos).
+     [PASÓ]     R3: cancelar sin motivo se rechaza; con motivo, el pedido queda CANCELLED.
+     [PASÓ]     R3: O015 se devuelve desde SHIPPED; O016 no puede entregarse estando en DRAFT.
+     [PASÓ]     Money no acepta montos negativos ni sumar monedas distintas; un artículo no tiene 0 piezas.
+     [PASÓ]     Un artículo con precio en dólares no se puede agregar al pedido.
+     [PASÓ]     E01: O001 - evaluar_descuento (AND VIP + monto >500 + unidades >=4 + NOT promo)
+     [PASÓ]     E02: O002 - evaluar_descuento (No VIP, total menor a 5000)
+     [PASÓ]     E03: O003 - confirmar (Cliente inactivo)
+     [PASÓ]     E04: O005 - evaluar_descuento (Promocion activa bloquea descuento)
+     [PASÓ]     E05: O006 - evaluar_descuento (OR total >5000 y sin promocion)
+     [PASÓ]     E06: O007 - confirmar (Pedido sin articulos)
+     [PASÓ]     E07: O008 - confirmar (20 unidades permitidas)
+     [PASÓ]     E08: O009 - agregar SKU003 x2 (21 unidades excede limite)
+     [PASÓ]     E09: O010 - evaluar_descuento (Umbral estricto >500)
+     [PASÓ]     E10: O011 - evaluar_descuento (Solo 3 unidades, requiere 4)
+     [PASÓ]     E11: O012 - confirmar y enviar sin guia (La confirmacion es valida pero falta guia)
+     [PASÓ]     E12: O013 - confirmar dos veces (No permite confirmar desde CONFIRMED)
+     [PASÓ]     E13: O014 - confirmar, enviar y cancelar (No permite cancelar desde SHIPPED)
+     [PASÓ]     E14: O015 - confirmar, enviar y devolver (Termina en RETURNED)
+     [PASÓ]     E15: O016 - confirmar, enviar y entregar (Termina en DELIVERED)
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  API REST de TechStore con Swagger (pruebas de punta a punta con TestClient): 35 de 35 pruebas correctas
+  OK  Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv: 15 de 15 pruebas correctas
+  OK  Reglas del pedido (pruebas unitarias del dominio): 11 de 11 pruebas correctas
+  OK  Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria): 6 de 6 pruebas correctas
+  OK  Seguridad: quién puede cancelar un pedido (autorización): 18 de 18 pruebas correctas
+  OK  Cobro con pasarela de pago simulada (mocks: no se cobra dinero real): 7 de 7 pruebas correctas
+  OK  TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks): 13 de 13 pruebas correctas
+  OK  TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados): 41 de 41 pruebas correctas
+
+  CONCLUSIÓN: las 146 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.18-final-0 _______________
+
+Name                              Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------
+src/__init__.py                       0      0      0      0   100%
+src/api.py                          206      0     26      0   100%
+src/application.py                   13      0      2      0   100%
+src/domain.py                        29      0      6      0   100%
+src/repository.py                    22      0      0      0   100%
+src/security.py                       8      0      4      0   100%
+src/techstore/__init__.py             0      0      0      0   100%
+src/techstore/domain.py             109      1     30      1    99%   40
+src/techstore/fixtures.py            15      0      2      0   100%
+src/techstore/repository.py          17      0      0      0   100%
+src/techstore/service.py             33      0      2      0   100%
+src/techstore/specifications.py      53      1      4      0    98%   8
+-----------------------------------------------------------------------------
+TOTAL                               505      2     76      1    99%
+Coverage HTML written to dir htmlcov
+Required test coverage of 80% reached. Total coverage: 99.48%
+============================= 146 passed in 1.34s ==============================

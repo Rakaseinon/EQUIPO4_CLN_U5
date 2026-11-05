@@ -1,0 +1,22 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 7 items
+
+  >> Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)
+     [PASÓ]     Si la pasarela APRUEBA el pago, el servicio devuelve el importe cobrado.
+     [PASÓ]     Si la pasarela RECHAZA el pago, el servicio lanza un error.
+     [PASÓ]     Pago RECHAZADO de un pedido VIP de $200: se intentó cobrar $170 y se lanzó error.
+     [PASÓ]     Mejora de consistencia (TDD): si el pago se rechaza, el pedido NO debe quedar confirmado.
+     [PASÓ]     Si la pasarela no responde (timeout), se informa 'servicio no disponible' y no se confirma.
+     [PASÓ]     Si el cliente tiene deuda, el pedido se rechaza ANTES de intentar cobrar.
+     [PASÓ]     Un pedido con total $0 se rechaza sin intentar cobrar.
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Cobro con pasarela de pago simulada (mocks: no se cobra dinero real): 7 de 7 pruebas correctas
+
+  CONCLUSIÓN: las 7 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 7 passed in 0.02s ===============================

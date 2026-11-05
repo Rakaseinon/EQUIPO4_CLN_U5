@@ -1,0 +1,29 @@
+$ python -m pytest tests/test_security.py -v -p no:cacheprovider
+============================= test session starts ==============================
+collecting ... collected 18 items
+
+tests/test_security.py::test_owner_within_24h PASSED                     [  5%]
+tests/test_security.py::test_stranger_denied PASSED                      [ 11%]
+tests/test_security.py::test_shipped_denied_even_admin PASSED            [ 16%]
+tests/test_security.py::test_expired_denied PASSED                       [ 22%]
+tests/test_security.py::test_admin_cancela_pedido_new_de_otro_usuario PASSED [ 27%]
+tests/test_security.py::test_dueno_exactamente_a_las_24_horas_se_rechaza PASSED [ 33%]
+tests/test_security.py::test_dueno_un_segundo_antes_de_24_horas PASSED   [ 38%]
+tests/test_security.py::test_matriz_de_autorizacion[administrador-no-NEW-1-PERMITIDO] PASSED [ 44%]
+tests/test_security.py::test_matriz_de_autorizacion[administrador-no-NEW-72-PERMITIDO] PASSED [ 50%]
+tests/test_security.py::test_matriz_de_autorizacion[administrador-s\xed-CONFIRMED-30-PERMITIDO] PASSED [ 55%]
+tests/test_security.py::test_matriz_de_autorizacion[administrador-s\xed-SHIPPED-1-DENEGADO] PASSED [ 61%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-s\xed-NEW-1-PERMITIDO] PASSED [ 66%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-s\xed-CONFIRMED-23-PERMITIDO] PASSED [ 72%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-s\xed-NEW-24-DENEGADO] PASSED [ 77%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-s\xed-SHIPPED-1-DENEGADO] PASSED [ 83%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-no-NEW-1-DENEGADO] PASSED [ 88%]
+tests/test_security.py::test_matriz_de_autorizacion[cliente-no-SHIPPED-1-DENEGADO] PASSED [ 94%]
+tests/test_security.py::test_sin_now_usa_la_hora_actual PASSED           [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Seguridad: quién puede cancelar un pedido (autorización): 18 de 18 pruebas correctas
+
+  CONCLUSIÓN: las 18 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 18 passed in 0.02s ==============================

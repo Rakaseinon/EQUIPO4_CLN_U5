@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 6 items
+
+  >> Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)
+     [PASÓ]     Un pedido guardado y confirmado con COMMIT queda registrado en la base de datos.
+     [PASÓ]     Si se hace ROLLBACK, el pedido que se iba a guardar se descarta.
+     [PASÓ]     Un pedido de $250 confirmado se guarda con id=2 y conserva total y estado.
+     [PASÓ]     Lo que ya se confirmó con COMMIT no se pierde si después se hace ROLLBACK de otro cambio.
+     [PASÓ]     Restricción de unicidad: no se pueden guardar dos pedidos con el mismo id.
+     [PASÓ]     Buscar un pedido que nunca se guardó regresa vacío (no truena).
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria): 6 de 6 pruebas correctas
+
+  CONCLUSIÓN: las 6 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 6 passed in 0.17s ===============================

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+collected 11 items / 7 deselected / 4 selected
+
+  >> Reglas del pedido (pruebas unitarias del dominio)
+     [PASÓ]     Un cliente VIP con pedido de $100 recibe 15% de descuento.
+     [PASÓ]     Un cliente regular con pedido de $100 NO recibe descuento.
+     [PASÓ]     Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).
+     [PASÓ]     Un cliente regular con pedido de $200 paga el total completo.
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Reglas del pedido (pruebas unitarias del dominio): 4 de 4 pruebas correctas
+
+  CONCLUSIÓN: las 4 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+======================= 4 passed, 7 deselected in 0.02s ========================

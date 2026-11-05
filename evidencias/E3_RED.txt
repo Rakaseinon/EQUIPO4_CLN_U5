@@ -1,0 +1,43 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 11 items
+
+  >> Reglas del pedido (pruebas unitarias del dominio)
+     [PASÓ]     Un cliente VIP con pedido de $100 recibe 15% de descuento.
+     [PASÓ]     Un cliente regular con pedido de $100 NO recibe descuento.
+     [PASÓ]     Un cliente con deuda pendiente no puede confirmar su pedido.
+     [PASÓ]     Un pedido con total de $0 (cero o negativo) se rechaza.
+     [PASÓ]     Un pedido con total de $-1 (cero o negativo) se rechaza.
+     [PASÓ]     Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).
+     [PASÓ]     Un cliente regular con pedido de $200 paga el total completo.
+     [PASÓ]     Caso límite: el total más pequeño posible ($0.01) sí se acepta.
+     [PASÓ]     Caso límite: deuda exactamente de $0 NO bloquea la confirmación.
+     [PASÓ]     Si el total es inválido y además hay deuda, primero se reporta el total inválido.
+     [FALLÓ]    TDD: un pedido que ya fue confirmado NO puede confirmarse otra vez.
+                Esperado: error ValueError "already confirmed"
+                Real:     Failed: DID NOT RAISE ValueError
+
+=================================== FAILURES ===================================
+__________________________ test_cannot_confirm_twice ___________________________
+
+    def test_cannot_confirm_twice():
+        """TDD: un pedido que ya fue confirmado NO puede confirmarse otra vez.
+        Esperado: error ValueError "already confirmed\""""
+        order = Order(100)
+        order.confirm()
+>       with pytest.raises(ValueError, match="already confirmed"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_order.py:95: Failed
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  !!  Reglas del pedido (pruebas unitarias del dominio): 10 de 11 pruebas correctas
+
+  CONCLUSIÓN: 1 de 11 pruebas FALLARON. Revisa arriba qué regla no se cumple (Esperado vs Real).
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+=========================== short test summary info ============================
+ tests/test_order.py::test_cannot_confirm_twice - Failed: DID NOT RAISE Value...
+========================= 1 failed, 10 passed in 0.03s =========================

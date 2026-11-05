@@ -1,0 +1,18 @@
+$ python -m pytest tests/test_service.py -v -p no:cacheprovider
+============================= test session starts ==============================
+collecting ... collected 7 items
+
+tests/test_service.py::test_gateway_approved PASSED                      [ 14%]
+tests/test_service.py::test_gateway_rejected PASSED                      [ 28%]
+tests/test_service.py::test_vip_200_rechazado_intenta_cobrar_170 PASSED  [ 42%]
+tests/test_service.py::test_pago_rechazado_no_deja_pedido_confirmado PASSED [ 57%]
+tests/test_service.py::test_pasarela_no_responde_timeout PASSED          [ 71%]
+tests/test_service.py::test_cliente_con_deuda_no_llega_a_la_pasarela PASSED [ 85%]
+tests/test_service.py::test_total_invalido_no_llega_a_la_pasarela PASSED [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Cobro con pasarela de pago simulada (mocks: no se cobra dinero real): 7 de 7 pruebas correctas
+
+  CONCLUSIÓN: las 7 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 7 passed in 0.02s ===============================

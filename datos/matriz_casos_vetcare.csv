@@ -1,0 +1,27 @@
+﻿ID,Regla (BRD),Entrada,Resultado esperado,Tipo,Prueba pytest,Resultado real,Estado
+VC-01,RN-04 Bloqueo por alergia,"Firulais 12 kg, alérgico a Penicilina; receta Meloxicam 0.1/kg",Se agrega; dosis 1.2,Éxito,test_vc01,"agregado Metacam, dosis total 1.2",PASÓ
+VC-02,RN-04 Bloqueo por alergia,Receta con principio activo Penicilina,AlergiaRegistrada; receta vacía,Error,test_vc02,Igual al esperado,PASÓ
+VC-03,RN-04 Bloqueo por alergia,"'PENICILINA', '  penicilina ', 'Penicilína'",También se bloquea,Límite,test_vc03,3 de 3 variantes correctas,PASÓ
+VC-04,RF-02 Peso para dosificar,Paciente sin peso o con peso 0,PesoRequerido,Límite,test_vc04,2 de 2 variantes correctas,PASÓ
+VC-05,RN-04 Datos de receta,Dosis 0 por kg; alergia vacía,ValueError,Error,test_vc05,Igual al esperado,PASÓ
+VC-06,RN-03 / US07 Vacuna base,"Quíntuple Canina con lote, 04/11/2026",Refuerzo 25/11/2026 (21 días),Éxito,test_vc06,refuerzo 25/11/2026,PASÓ
+VC-07,RF-04 Vacuna anual,"Antirrábica anual, 04/11/2026",Refuerzo 04/11/2027 (365 días),Éxito,test_vc07,refuerzo 04/11/2027,PASÓ
+VC-08,RN-03 Lote obligatorio,"Lote vacío, fabricante vacío o lote '   '",LoteObligatorio,Error / Límite,test_vc08,3 de 3 variantes correctas,PASÓ
+VC-09,RF-04 Esquema de vacuna,Esquema 'mensual',ValueError,Error,test_vc09,Igual al esperado,PASÓ
+VC-10,RF-05 Recordatorio 48 h,"Faltan 48, 47, 49 y 0 horas","Sí, Sí, No, No",Límite,test_vc10,4 de 4 variantes correctas,PASÓ
+VC-11,RN-01 Nota clínica,Editar borrador y firmar con cédula,Texto corregido y nota firmada,Éxito,test_vc11,"'Otitis externa', firmada por Dra. Ruiz",PASÓ
+VC-12,RN-01 Inmutabilidad,"Editar, borrar o volver a firmar nota firmada",NotaFirmada; texto intacto,Error,test_vc12,texto intacto: True,PASÓ
+VC-13,RN-01 / US13 Enmienda,Enmienda con autor y motivo,1 enmienda; original sin cambios,Éxito,test_vc13,1 enmienda de Dr. Director: Omisión de dosis,PASÓ
+VC-14,RN-01 Enmienda,"Enmienda sin motivo, sin autor o motivo '   '",EnmiendaInvalida,Límite,test_vc14,3 de 3 variantes correctas,PASÓ
+VC-15,RN-01 Enmienda,Enmendar nota sin firmar; firmar sin cédula,EnmiendaInvalida y ValueError,Límite,test_vc15,Igual al esperado,PASÓ
+VC-16,US09 Ingreso a hospitalización,Mascota 1 a jaula J1 libre,J1 ocupada; libre J2,Éxito,test_vc16,jaulas libres: ['J2'],PASÓ
+VC-17,US09 Ingreso a hospitalización,Jaula ocupada / mascota ya internada / jaula J9,JaulaOcupada / ValueError,Error,test_vc17,Igual al esperado,PASÓ
+VC-18,RN-06 Alta cruzada,Alta médica + precuenta confirmada,Jaula liberada,Éxito,test_vc18,"mascota 1 egresada; libres ['J1', 'J2']",PASÓ
+VC-19,RN-06 Alta cruzada,Solo una firma o ninguna,AltaIncompleta; jaula ocupada,Límite,test_vc19,3 de 3 variantes correctas,PASÓ
+VC-20,RN-06 Alta cruzada,Firmar alta en jaula vacía o inexistente,ValueError,Error,test_vc20,Igual al esperado,PASÓ
+VC-21,Persistencia (RN-03),Registrar vacuna + commit,Registro visible con lote y refuerzo,Integración,test_vc21,"1 registro: Vacuna(mascota=1, Quíntuple Canina, lote=L-2026-118, refuerzo=2026-11-25)",PASÓ
+VC-22,Persistencia (RN-03),Agregar vacuna + rollback,0 registros,Integración,test_vc22,0 registros,PASÓ
+VC-23,Persistencia (RN-03),INSERT directo sin lote/fabricante,IntegrityError (CHECK),Integración,test_vc23,2 de 2 variantes correctas,PASÓ
+VC-24,RF-05 / US08 Recordatorio,Refuerzo a 48 h; correr proceso 2 veces,"1 mensaje, no se repite",Mock,test_vc24,"1a corrida {'enviados': 1, 'fallidos': 0}, 2a corrida {'enviados': 0, 'fallidos': 0}; mensaje: 'VetCare 24: el refuerzo de Quíntuple Canina es el 25/11/2026. Confirme o reagende su cita.'",PASÓ
+VC-25,RF-05 / US08 Recordatorio,Faltan 5 días,No se envía,Mock,test_vc25,Igual al esperado,PASÓ
+VC-26,RF-05 / US08 Recordatorio,Proveedor en timeout y luego disponible,1 fallido; se envía en la siguiente corrida,Mock,test_vc26,"1a corrida {'enviados': 0, 'fallidos': 1}, 2a corrida {'enviados': 1, 'fallidos': 0}",PASÓ

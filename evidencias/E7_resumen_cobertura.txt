@@ -1,0 +1,40 @@
+$ python -m ruff check src tests
+All checks passed!
+
+
+$ python -m pytest --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+   ... (146 líneas [PASÓ], ver E7_ruff_cobertura.txt) ...
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  API REST de TechStore con Swagger (pruebas de punta a punta con TestClient): 35 de 35 pruebas correctas
+  OK  Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv: 15 de 15 pruebas correctas
+  OK  Reglas del pedido (pruebas unitarias del dominio): 11 de 11 pruebas correctas
+  OK  Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria): 6 de 6 pruebas correctas
+  OK  Seguridad: quién puede cancelar un pedido (autorización): 18 de 18 pruebas correctas
+  OK  Cobro con pasarela de pago simulada (mocks: no se cobra dinero real): 7 de 7 pruebas correctas
+  OK  TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks): 13 de 13 pruebas correctas
+  OK  TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados): 41 de 41 pruebas correctas
+
+  CONCLUSIÓN: las 146 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.18-final-0 _______________
+
+Name                              Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------
+src/__init__.py                       0      0      0      0   100%
+src/api.py                          206      0     26      0   100%
+src/application.py                   13      0      2      0   100%
+src/domain.py                        29      0      6      0   100%
+src/repository.py                    22      0      0      0   100%
+src/security.py                       8      0      4      0   100%
+src/techstore/__init__.py             0      0      0      0   100%
+src/techstore/domain.py             109      1     30      1    99%   40
+src/techstore/fixtures.py            15      0      2      0   100%
+src/techstore/repository.py          17      0      0      0   100%
+src/techstore/service.py             33      0      2      0   100%
+src/techstore/specifications.py      53      1      4      0    98%   8
+-----------------------------------------------------------------------------
+TOTAL                               505      2     76      1    99%
+Coverage HTML written to dir htmlcov
+Required test coverage of 80% reached. Total coverage: 99.48%
+============================= 146 passed in 1.34s ==============================

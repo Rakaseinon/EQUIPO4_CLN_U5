@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 19 items
+
+  >> Reglas del pedido (pruebas unitarias del dominio)
+     [PASÓ]     Un cliente VIP con pedido de $100 recibe 15% de descuento.
+     [PASÓ]     Un cliente regular con pedido de $100 NO recibe descuento.
+     [PASÓ]     Un cliente con deuda pendiente no puede confirmar su pedido.
+     [PASÓ]     Un pedido con total de $0 (cero o negativo) se rechaza.
+     [PASÓ]     Un pedido con total de $-1 (cero o negativo) se rechaza.
+     [PASÓ]     Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).
+     [PASÓ]     Un cliente regular con pedido de $200 paga el total completo.
+     [PASÓ]     Caso límite: el total más pequeño posible ($0.01) sí se acepta.
+     [PASÓ]     Caso límite: deuda exactamente de $0 NO bloquea la confirmación.
+     [PASÓ]     Si el total es inválido y además hay deuda, primero se reporta el total inválido.
+     [PASÓ]     TDD: un pedido que ya fue confirmado NO puede confirmarse otra vez.
+
+  >> test_repository
+     [PASÓ]     test repository commit
+     [PASÓ]     test repository rollback
+
+  >> test_security
+     [PASÓ]     test owner within 24h
+     [PASÓ]     test stranger denied
+     [PASÓ]     test shipped denied even admin
+     [PASÓ]     test expired denied
+
+  >> test_service
+     [PASÓ]     test gateway approved
+     [PASÓ]     test gateway rejected
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Reglas del pedido (pruebas unitarias del dominio): 11 de 11 pruebas correctas
+  OK  test_repository: 2 de 2 pruebas correctas
+  OK  test_security: 4 de 4 pruebas correctas
+  OK  test_service: 2 de 2 pruebas correctas
+
+  CONCLUSIÓN: las 19 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 19 passed in 0.16s ==============================

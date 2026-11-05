@@ -1,0 +1,16 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# Reglas fijas para que el resultado sea igual en cualquier versión de Ruff (local y CI).
+select = ["E", "F", "W", "I", "B"]

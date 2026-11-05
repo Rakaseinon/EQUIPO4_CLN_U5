@@ -1,0 +1,18 @@
+﻿ID,Regla,Entrada,Resultado esperado,Tipo,Prueba pytest,Resultado real,Estado
+TS-01,R1 Máx. 20 unidades,"O008: 20 unidades, confirmar",CONFIRMED,Éxito,tests/test_techstore_reglas.py::test_r1_exito_20_unidades_exactas,"20 unidades, estado CONFIRMED",PASÓ
+TS-02,R1 Máx. 20 unidades,O009: 19 unidades + 2,OrderItemLimitExceeded; sigue 19,Error,tests/test_techstore_reglas.py::test_r1_error_agregar_hasta_21_unidades,rechazado; el pedido sigue con 19 unidades,PASÓ
+TS-03,R1 Máx. 20 unidades,O009: 19 unidades + 1,Aceptado; 20 unidades,Límite,tests/test_techstore_reglas.py::test_r1_limite_19_mas_1_llega_a_20,20 unidades,PASÓ
+TS-04,R2 Descuentos,"O001: VIP, $2100, 4 u., sin promo",10 %,Éxito,"tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O001-10-VIP, total $2100, 4 unidades, sin promoci\xf3n]",descuento de 10 %,PASÓ
+TS-05,R2 Descuentos,"O006: $18000, sin promo",5 %,Éxito,"tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O006-5-total mayor a $5000, sin promoci\xf3n]",descuento de 5 %,PASÓ
+TS-06,R2 Descuentos,O005: VIP con promoción activa,0 %,Error,tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O005-0-promoci\xf3n activa bloquea el descuento],descuento de 0 %,PASÓ
+TS-07,R2 Descuentos,O010: total exactamente $500,0 % (umbral estricto),Límite,tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O010-0-total EXACTAMENTE $500 (la regla es > 500)],descuento de 0 %,PASÓ
+TS-08,R2 Descuentos,"VIP $5500, 5 u. (cumple 10 % y 5 %)",10 % (prioridad),Límite,tests/test_techstore_reglas.py::test_r2_limite_prioridad_10_sobre_5,descuento de 10 %,PASÓ
+TS-09,R3 Máquina de estados,"O016: confirmar, enviar, entregar",DELIVERED + 3 eventos,Éxito,tests/test_techstore_reglas.py::test_r3_exito_flujo_completo_hasta_entregado,"DELIVERED, eventos ['OrderConfirmed', 'OrderShipped', 'OrderDelivered']",PASÓ
+TS-10,R3 Máquina de estados,O014: cancelar estando SHIPPED,InvalidOrderTransition; sigue SHIPPED,Error,tests/test_techstore_reglas.py::test_r3_error_cancelar_pedido_enviado,rechazado; estado SHIPPED,PASÓ
+TS-11,R3 Máquina de estados,O013: confirmar dos veces,2a rechazada; 1 solo evento,Límite,tests/test_techstore_reglas.py::test_r3_limite_doble_confirmacion_sin_evento_extra,eventos ['OrderConfirmed'],PASÓ
+TS-12,R3 Máquina de estados,O003: cliente inactivo,InvalidOrderData; DRAFT,Error,tests/test_techstore_reglas.py::test_r3_no_se_confirma[O003-cliente inactivo],Igual al esperado,PASÓ
+TS-13,Persistencia,Guardar O001 + commit,"Registro visible, total $2100",Integración,tests/test_techstore_integracion.py::test_guardar_pedido_con_commit,"O001: total $2100.00, 4 unidades, DRAFT",PASÓ
+TS-14,Persistencia,Guardar O002 + rollback,Registro ausente,Integración,tests/test_techstore_integracion.py::test_rollback_descarta_el_pedido,registro: None,PASÓ
+TS-15,Pasarela (mock),"O001, pago aprobado",charge(1890.00); CONFIRMED; guardado,Mock,tests/test_techstore_integracion.py::test_cobro_aprobado_aplica_descuento_y_guarda,"cobrado $1890.00, estado CONFIRMED, guardado con cargo $1890.00",PASÓ
+TS-16,Pasarela (mock),"O002, pago rechazado",PagoRechazado; DRAFT; sin registro,Mock,tests/test_techstore_integracion.py::test_cobro_rechazado_no_confirma_ni_guarda,"estado DRAFT, registros en BD: 0",PASÓ
+TS-17,Pasarela (mock),"O006, pasarela en timeout",PasarelaNoDisponible; DRAFT,Mock,tests/test_techstore_integracion.py::test_pasarela_timeout,estado DRAFT,PASÓ

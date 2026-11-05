@@ -1,0 +1,79 @@
+$ python -m pytest tests/test_techstore_reglas.py tests/test_techstore_integracion.py -v -p no:cacheprovider --cov=src/techstore --cov-report=term-missing
+============================= test session starts ==============================
+collecting ... collected 54 items
+
+tests/test_techstore_reglas.py::test_r1_exito_20_unidades_exactas PASSED [  1%]
+tests/test_techstore_reglas.py::test_r1_error_agregar_hasta_21_unidades PASSED [  3%]
+tests/test_techstore_reglas.py::test_r1_limite_19_mas_1_llega_a_20 PASSED [  5%]
+tests/test_techstore_reglas.py::test_r1_cuenta_unidades_no_renglones PASSED [  7%]
+tests/test_techstore_reglas.py::test_r1_no_se_agregan_articulos_despues_de_confirmar PASSED [  9%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O001-10-VIP, total $2100, 4 unidades, sin promoci\xf3n] PASSED [ 11%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O006-5-total mayor a $5000, sin promoci\xf3n] PASSED [ 12%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O002-0-no VIP y total menor a $5000] PASSED [ 14%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O005-0-promoci\xf3n activa bloquea el descuento] PASSED [ 16%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O010-0-total EXACTAMENTE $500 (la regla es > 500)] PASSED [ 18%]
+tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O011-0-VIP con solo 3 unidades (requiere 4)] PASSED [ 20%]
+tests/test_techstore_reglas.py::test_r2_limite_prioridad_10_sobre_5 PASSED [ 22%]
+tests/test_techstore_reglas.py::test_r2_limite_umbrales PASSED           [ 24%]
+tests/test_techstore_reglas.py::test_r2_or_algun_descuento PASSED        [ 25%]
+tests/test_techstore_reglas.py::test_r2_specification_no_modifica_el_pedido PASSED [ 27%]
+tests/test_techstore_reglas.py::test_r3_exito_flujo_completo_hasta_entregado PASSED [ 29%]
+tests/test_techstore_reglas.py::test_r3_error_cancelar_pedido_enviado PASSED [ 31%]
+tests/test_techstore_reglas.py::test_r3_limite_doble_confirmacion_sin_evento_extra PASSED [ 33%]
+tests/test_techstore_reglas.py::test_r3_envio_sin_guia[] PASSED          [ 35%]
+tests/test_techstore_reglas.py::test_r3_envio_sin_guia[   ] PASSED       [ 37%]
+tests/test_techstore_reglas.py::test_r3_no_se_confirma[O003-cliente inactivo] PASSED [ 38%]
+tests/test_techstore_reglas.py::test_r3_no_se_confirma[O007-pedido sin art\xedculos] PASSED [ 40%]
+tests/test_techstore_reglas.py::test_r3_cancelacion_valida_y_sin_motivo PASSED [ 42%]
+tests/test_techstore_reglas.py::test_r3_devolucion_y_entrega_desde_draft PASSED [ 44%]
+tests/test_techstore_reglas.py::test_value_objects_invalidos PASSED      [ 46%]
+tests/test_techstore_reglas.py::test_solo_se_aceptan_pesos_mexicanos PASSED [ 48%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E01] PASSED   [ 50%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E02] PASSED   [ 51%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E03] PASSED   [ 53%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E04] PASSED   [ 55%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E05] PASSED   [ 57%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E06] PASSED   [ 59%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E07] PASSED   [ 61%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E08] PASSED   [ 62%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E09] PASSED   [ 64%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E10] PASSED   [ 66%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E11] PASSED   [ 68%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E12] PASSED   [ 70%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E13] PASSED   [ 72%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E14] PASSED   [ 74%]
+tests/test_techstore_reglas.py::test_escenarios_actividad4[E15] PASSED   [ 75%]
+tests/test_techstore_integracion.py::test_guardar_pedido_con_commit PASSED [ 77%]
+tests/test_techstore_integracion.py::test_rollback_descarta_el_pedido PASSED [ 79%]
+tests/test_techstore_integracion.py::test_id_de_pedido_duplicado_se_rechaza PASSED [ 81%]
+tests/test_techstore_integracion.py::test_cobro_aprobado_aplica_descuento_y_guarda PASSED [ 83%]
+tests/test_techstore_integracion.py::test_cobro_rechazado_no_confirma_ni_guarda PASSED [ 85%]
+tests/test_techstore_integracion.py::test_pasarela_timeout PASSED        [ 87%]
+tests/test_techstore_integracion.py::test_regla_rota_no_llega_a_la_pasarela[O003-InvalidOrderData] PASSED [ 88%]
+tests/test_techstore_integracion.py::test_regla_rota_no_llega_a_la_pasarela[O007-InvalidOrderData] PASSED [ 90%]
+tests/test_techstore_integracion.py::test_pedido_ya_confirmado_no_se_cobra_dos_veces PASSED [ 92%]
+tests/test_techstore_integracion.py::test_falla_de_bd_reembolsa_el_cobro PASSED [ 94%]
+tests/test_techstore_integracion.py::test_importe_a_cobrar[O001-1890.00] PASSED [ 96%]
+tests/test_techstore_integracion.py::test_importe_a_cobrar[O006-17100.00] PASSED [ 98%]
+tests/test_techstore_integracion.py::test_importe_a_cobrar[O002-1050.00] PASSED [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados): 41 de 41 pruebas correctas
+  OK  TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks): 13 de 13 pruebas correctas
+
+  CONCLUSIÓN: las 54 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.18-final-0 _______________
+
+Name                              Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------
+src/techstore/__init__.py             0      0      0      0   100%
+src/techstore/domain.py             109      1     30      1    99%   40
+src/techstore/fixtures.py            15      0      2      0   100%
+src/techstore/repository.py          17      0      0      0   100%
+src/techstore/service.py             33      0      2      0   100%
+src/techstore/specifications.py      53      1      4      0    98%   8
+-----------------------------------------------------------------------------
+TOTAL                               227      2     38      1    99%
+============================== 54 passed in 0.36s ==============================

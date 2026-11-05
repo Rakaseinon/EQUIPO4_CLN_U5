@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collecting ... collected 13 items
+
+tests/test_order.py::test_vip_discount PASSED                            [  7%]
+tests/test_order.py::test_regular_no_discount PASSED                     [ 15%]
+tests/test_order.py::test_customer_debt PASSED                           [ 23%]
+tests/test_order.py::test_invalid_total[0] PASSED                        [ 30%]
+tests/test_order.py::test_invalid_total[-1] PASSED                       [ 38%]
+tests/test_repository.py::test_repository_commit PASSED                  [ 46%]
+tests/test_repository.py::test_repository_rollback PASSED                [ 53%]
+tests/test_security.py::test_owner_within_24h PASSED                     [ 61%]
+tests/test_security.py::test_stranger_denied PASSED                      [ 69%]
+tests/test_security.py::test_shipped_denied_even_admin PASSED            [ 76%]
+tests/test_security.py::test_expired_denied PASSED                       [ 84%]
+tests/test_service.py::test_gateway_approved PASSED                      [ 92%]
+tests/test_service.py::test_gateway_rejected PASSED                      [100%]
+
+============================== 13 passed in 0.61s ==============================

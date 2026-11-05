@@ -1,0 +1,90 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 7 items
+
+  >> Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)
+     [PASÓ]     Si la pasarela APRUEBA el pago, el servicio devuelve el importe cobrado.
+     [PASÓ]     Si la pasarela RECHAZA el pago, el servicio lanza un error.
+     [PASÓ]     Pago RECHAZADO de un pedido VIP de $200: se intentó cobrar $170 y se lanzó error.
+     [FALLÓ]    Mejora de consistencia (TDD): si el pago se rechaza, el pedido NO debe quedar confirmado.
+                Esperado: el pedido sigue en estado NEW
+                Real:     estado del pedido: CONFIRMED
+     [FALLÓ]    Si la pasarela no responde (timeout), se informa 'servicio no disponible' y no se confirma.
+                Esperado: PaymentUnavailable y pedido en NEW
+                Real:     TimeoutError: gateway timeout
+     [PASÓ]     Si el cliente tiene deuda, el pedido se rechaza ANTES de intentar cobrar.
+     [PASÓ]     Un pedido con total $0 se rechaza sin intentar cobrar.
+
+=================================== FAILURES ===================================
+________________ test_pago_rechazado_no_deja_pedido_confirmado _________________
+
+gateway = <Mock id='139718420861616'>
+resultado = <function resultado.<locals>.anotar at 0x7f12bad96d40>
+
+    def test_pago_rechazado_no_deja_pedido_confirmado(gateway, resultado):
+        """Mejora de consistencia (TDD): si el pago se rechaza, el pedido NO debe quedar confirmado.
+        Esperado: el pedido sigue en estado NEW"""
+        gateway.charge.return_value = False
+        pedido = Order(200, vip=True)
+        with pytest.raises(RuntimeError):
+            OrderService(gateway).checkout(pedido)
+        resultado(f"estado del pedido: {pedido.status}")
+>       assert pedido.status == "NEW"
+E       AssertionError: assert 'CONFIRMED' == 'NEW'
+E         
+E         - NEW
+E         + CONFIRMED
+
+tests/test_service.py:55: AssertionError
+______________________ test_pasarela_no_responde_timeout _______________________
+
+gateway = <Mock id='139718420862288'>
+resultado = <function resultado.<locals>.anotar at 0x7f12bb29bb00>
+
+    def test_pasarela_no_responde_timeout(gateway, resultado):
+        """Si la pasarela no responde (timeout), se informa 'servicio no disponible' y no se confirma.
+        Esperado: PaymentUnavailable y pedido en NEW"""
+        gateway.charge.side_effect = TimeoutError("gateway timeout")
+        pedido = Order(100)
+        with pytest.raises(PaymentUnavailable):
+>           OrderService(gateway).checkout(pedido)
+
+tests/test_service.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/application.py:11: in checkout
+    if not self.gateway.charge(amount):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/unittest/mock.py:1169: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.13/unittest/mock.py:1173: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Mock name='mock.charge' id='139718420860944'>, args = (100.0,)
+kwargs = {}
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               TimeoutError: gateway timeout
+
+/usr/local/lib/python3.13/unittest/mock.py:1234: TimeoutError
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  !!  Cobro con pasarela de pago simulada (mocks: no se cobra dinero real): 5 de 7 pruebas correctas
+
+  CONCLUSIÓN: 2 de 7 pruebas FALLARON. Revisa arriba qué regla no se cumple (Esperado vs Real).
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+=========================== short test summary info ============================
+FALLÓ tests/test_service.py::test_pago_rechazado_no_deja_pedido_confirmado - ...
+FALLÓ tests/test_service.py::test_pasarela_no_responde_timeout - TimeoutError...
+========================= 2 failed, 5 passed in 0.08s ==========================

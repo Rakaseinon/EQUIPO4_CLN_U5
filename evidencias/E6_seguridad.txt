@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/claude/EQUIPO4_CLN_U5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.3, anyio-4.15.1, cov-7.1.0
+collected 18 items
+
+  >> Seguridad: quién puede cancelar un pedido (autorización)
+     [PASÓ]     El dueño del pedido puede cancelarlo durante las primeras 24 horas (1 h de antigüedad).
+     [PASÓ]     Un usuario que NO es dueño ni administrador no puede cancelar un pedido ajeno.
+     [PASÓ]     Un pedido ENVIADO (SHIPPED) no se cancela, ni siquiera por un administrador.
+     [PASÓ]     El dueño ya no puede cancelar después de 25 horas.
+     [PASÓ]     Un ADMINISTRADOR puede cancelar el pedido NEW de otro usuario.
+     [PASÓ]     Caso límite: el dueño intenta cancelar EXACTAMENTE a las 24 horas.
+     [PASÓ]     Caso límite: al dueño le falta 1 segundo para cumplir 24 horas.
+     [PASÓ]     Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 72 h.
+     [PASÓ]     Matriz: administrador (¿dueño? sí) intenta cancelar pedido CONFIRMED de 30 h.
+     [PASÓ]     Matriz: administrador (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido CONFIRMED de 23 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 24 h.
+     [PASÓ]     Matriz: cliente (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? no) intenta cancelar pedido NEW de 1 h.
+     [PASÓ]     Matriz: cliente (¿dueño? no) intenta cancelar pedido SHIPPED de 1 h.
+     [PASÓ]     Si no se pasa 'now', la política usa la hora actual del sistema.
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Seguridad: quién puede cancelar un pedido (autorización): 18 de 18 pruebas correctas
+
+  CONCLUSIÓN: las 18 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 18 passed in 0.03s ==============================

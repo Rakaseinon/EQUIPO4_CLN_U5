@@ -1,0 +1,17 @@
+$ python -m pytest tests/test_repository.py -v -p no:cacheprovider
+============================= test session starts ==============================
+collecting ... collected 6 items
+
+tests/test_repository.py::test_repository_commit PASSED                  [ 16%]
+tests/test_repository.py::test_repository_rollback PASSED                [ 33%]
+tests/test_repository.py::test_guardar_pedido_250_con_commit PASSED      [ 50%]
+tests/test_repository.py::test_commit_sobrevive_a_un_rollback_posterior PASSED [ 66%]
+tests/test_repository.py::test_id_duplicado_se_rechaza_y_se_revierte PASSED [ 83%]
+tests/test_repository.py::test_buscar_pedido_inexistente PASSED          [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria): 6 de 6 pruebas correctas
+
+  CONCLUSIÓN: las 6 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 6 passed in 0.15s ===============================

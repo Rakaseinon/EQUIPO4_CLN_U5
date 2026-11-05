@@ -1,0 +1,62 @@
+$ python -m pytest tests/test_vetcare_reglas.py tests/test_vetcare_integracion.py -v -p no:cacheprovider --cov=src/vetcare --cov-report=term-missing
+============================= test session starts ==============================
+collecting ... collected 39 items
+
+tests/test_vetcare_reglas.py::test_vc01_receta_sin_alergia_calcula_dosis_por_peso PASSED [  2%]
+tests/test_vetcare_reglas.py::test_vc02_principio_activo_alergeno_se_bloquea PASSED [  5%]
+tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[PENICILINA] PASSED [  7%]
+tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[  penicilina ] PASSED [ 10%]
+tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[Penicil\xedna] PASSED [ 12%]
+tests/test_vetcare_reglas.py::test_vc04_sin_peso_no_se_puede_dosificar[None] PASSED [ 15%]
+tests/test_vetcare_reglas.py::test_vc04_sin_peso_no_se_puede_dosificar[0] PASSED [ 17%]
+tests/test_vetcare_reglas.py::test_vc05_datos_invalidos_de_receta_y_alergia PASSED [ 20%]
+tests/test_vetcare_reglas.py::test_vc06_vacuna_base_refuerzo_a_21_dias PASSED [ 23%]
+tests/test_vetcare_reglas.py::test_vc07_vacuna_anual_refuerzo_a_365_dias PASSED [ 25%]
+tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[-Zoetis] PASSED [ 28%]
+tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[L-1-] PASSED [ 30%]
+tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[   -Zoetis] PASSED [ 33%]
+tests/test_vetcare_reglas.py::test_vc09_esquema_desconocido PASSED       [ 35%]
+tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[48-True] PASSED [ 38%]
+tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[47-True] PASSED [ 41%]
+tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[49-False] PASSED [ 43%]
+tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[0-False] PASSED [ 46%]
+tests/test_vetcare_reglas.py::test_vc11_nota_sin_firmar_se_edita_y_luego_se_firma PASSED [ 48%]
+tests/test_vetcare_reglas.py::test_vc12_nota_firmada_no_se_edita_ni_borra PASSED [ 51%]
+tests/test_vetcare_reglas.py::test_vc13_enmienda_con_motivo_conserva_el_original PASSED [ 53%]
+tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[Dr. Director-] PASSED [ 56%]
+tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[-Omisi\xf3n] PASSED [ 58%]
+tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[Dr. Director-   ] PASSED [ 61%]
+tests/test_vetcare_reglas.py::test_vc15_enmienda_a_nota_sin_firmar_y_firma_incompleta PASSED [ 64%]
+tests/test_vetcare_reglas.py::test_vc16_internar_en_jaula_libre PASSED   [ 66%]
+tests/test_vetcare_reglas.py::test_vc17_jaula_ocupada_o_mascota_ya_internada PASSED [ 69%]
+tests/test_vetcare_reglas.py::test_vc18_alta_con_las_dos_firmas_libera_la_jaula PASSED [ 71%]
+tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[solo_medico] PASSED [ 74%]
+tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[solo_recepcion] PASSED [ 76%]
+tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[ninguna] PASSED [ 79%]
+tests/test_vetcare_reglas.py::test_vc20_operar_sobre_jaula_vacia_o_inexistente PASSED [ 82%]
+tests/test_vetcare_integracion.py::test_vc21_vacuna_se_guarda_con_commit PASSED [ 84%]
+tests/test_vetcare_integracion.py::test_vc22_rollback_descarta_la_aplicacion PASSED [ 87%]
+tests/test_vetcare_integracion.py::test_vc23_la_bd_tambien_exige_lote[-Zoetis] PASSED [ 89%]
+tests/test_vetcare_integracion.py::test_vc23_la_bd_tambien_exige_lote[L-1-  ] PASSED [ 92%]
+tests/test_vetcare_integracion.py::test_vc24_recordatorio_se_envia_una_sola_vez PASSED [ 94%]
+tests/test_vetcare_integracion.py::test_vc25_todavia_no_toca_el_recordatorio PASSED [ 97%]
+tests/test_vetcare_integracion.py::test_vc26_falla_del_proveedor_deja_pendiente PASSED [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta): 32 de 32 pruebas correctas
+  OK  VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock): 7 de 7 pruebas correctas
+
+  CONCLUSIÓN: las 39 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.18-final-0 _______________
+
+Name                        Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------
+src/vetcare/__init__.py         0      0      0      0   100%
+src/vetcare/domain.py         157      0     40      0   100%
+src/vetcare/repository.py      27      0      0      0   100%
+src/vetcare/servicios.py       31      0      4      0   100%
+-----------------------------------------------------------------------
+TOTAL                         215      0     44      0   100%
+============================== 39 passed in 0.30s ==============================

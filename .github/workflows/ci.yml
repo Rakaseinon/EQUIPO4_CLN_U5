@@ -1,0 +1,40 @@
+name: CI Business Logic
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Lint (Ruff)
+        run: ruff check src tests
+
+      - name: Pruebas + cobertura (minimo 80 %)
+        run: pytest --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+
+      - name: Build (compilar src)
+        run: python -m compileall -q src
+
+      - name: Publicar resumen legible en la pagina del pipeline
+        if: always()
+        run: |
+          if [ -f reportes/resultados_pruebas.md ]; then
+            cat reportes/resultados_pruebas.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Guardar reportes (cobertura HTML y matriz de resultados)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-u5
+          path: |
+            htmlcov/
+            reportes/

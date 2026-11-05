@@ -1,0 +1,13 @@
+$ git log --oneline -3
+49cb144 Revert "Prueba: falla controlada en descuento VIP"
+417ca8f Prueba: falla controlada en descuento VIP
+782f0da Unidad 5: pruebas y CI
+
+▶ Lint (Ruff)
+All checks passed!
+▶ Pruebas + cobertura (mínimo 80 %)
+  CONCLUSIÓN: las 185 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+Required test coverage of 80% reached. Total coverage: 99.64%
+185 passed in 1.24s
+▶ Build
+✔ PIPELINE VERDE

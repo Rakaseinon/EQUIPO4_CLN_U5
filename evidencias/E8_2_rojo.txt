@@ -1,0 +1,14 @@
+$ git log --oneline -1
+417ca8f Prueba: falla controlada en descuento VIP
+
+▶ Lint (Ruff)
+All checks passed!
+▶ Pruebas + cobertura (mínimo 80 %)
+     [FALLÓ]    Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).
+                Esperado: cobro de $170.00 y descuento de $30.00
+                Real:     cobro $170.00, descuento $30.00  ->  la verificación falló: assert 170.0 == 999
+  CONCLUSIÓN: 1 de 185 pruebas FALLARON. Revisa arriba qué regla no se cumple (Esperado vs Real).
+Required test coverage of 80% reached. Total coverage: 99.64%
+FALLÓ tests/test_order.py::test_vip_200_paga_170 - assert 170.0 == 999
+1 failed, 184 passed in 1.21s
+✖ PIPELINE ROJO: pytest terminó con código 1

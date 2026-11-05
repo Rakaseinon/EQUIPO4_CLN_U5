@@ -1,0 +1,22 @@
+$ python -m pytest tests/test_order.py -v -p no:cacheprovider
+============================= test session starts ==============================
+collecting ... collected 11 items
+
+tests/test_order.py::test_vip_discount PASSED                            [  9%]
+tests/test_order.py::test_regular_no_discount PASSED                     [ 18%]
+tests/test_order.py::test_customer_debt PASSED                           [ 27%]
+tests/test_order.py::test_invalid_total[0] PASSED                        [ 36%]
+tests/test_order.py::test_invalid_total[-1] PASSED                       [ 45%]
+tests/test_order.py::test_vip_200_paga_170 PASSED                        [ 54%]
+tests/test_order.py::test_regular_200_paga_200 PASSED                    [ 63%]
+tests/test_order.py::test_total_minimo_valido PASSED                     [ 72%]
+tests/test_order.py::test_deuda_cero_si_permite PASSED                   [ 81%]
+tests/test_order.py::test_total_invalido_tiene_prioridad_sobre_deuda PASSED [ 90%]
+tests/test_order.py::test_cannot_confirm_twice PASSED                    [100%]
+
+========================== RESUMEN EN LENGUAJE CLARO ===========================
+  OK  Reglas del pedido (pruebas unitarias del dominio): 11 de 11 pruebas correctas
+
+  CONCLUSIÓN: las 11 pruebas pasaron. Todas las reglas de negocio verificadas se comportan como se esperaba.
+  Matriz de resultados guardada en: reportes/resultados_pruebas.(csv|md|json)
+============================== 11 passed in 0.02s ==============================

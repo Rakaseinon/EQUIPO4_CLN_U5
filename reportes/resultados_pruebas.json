@@ -1,0 +1,1861 @@
+{
+  "resumen": {
+    "fecha": "2026-11-05 16:12",
+    "total": 185,
+    "pasaron": 185,
+    "fallaron": 0,
+    "otras": 0
+  },
+  "pruebas": [
+    {
+      "n": 1,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_inicio_redirige_a_swagger",
+      "que_se_verifica": "Abrir la raíz de la API lleva directo a la documentación Swagger.",
+      "resultado_esperado": "redirección a /docs",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 10.3
+    },
+    {
+      "n": 2,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_swagger_y_openapi_disponibles",
+      "que_se_verifica": "La documentación Swagger (/docs) y el contrato OpenAPI se publican.",
+      "resultado_esperado": "200 y aparecen las rutas de pedidos, cobro y pruebas",
+      "resultado_real": "10 rutas documentadas",
+      "estado": "PASÓ",
+      "duracion_ms": 41.5
+    },
+    {
+      "n": 3,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_consultar_pedido",
+      "que_se_verifica": "GET /orders/O001 regresa el pedido con su descuento y una explicación en español.",
+      "resultado_esperado": "200, DRAFT, total 2100.00, descuento 0.10",
+      "resultado_real": "200: Pedido de 4 unidades por $2100.00 MXN; descuento aplicable 10 %.",
+      "estado": "PASÓ",
+      "duracion_ms": 12.0
+    },
+    {
+      "n": 4,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_pedido_inexistente_404[get-/orders/NOPE]",
+      "que_se_verifica": "Un pedido que no existe responde 404 (/orders/NOPE).",
+      "resultado_esperado": "404",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 10.8
+    },
+    {
+      "n": 5,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_pedido_inexistente_404[post-/orders/NOPE/confirm]",
+      "que_se_verifica": "Un pedido que no existe responde 404 (/orders/NOPE/confirm).",
+      "resultado_esperado": "404",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 11.3
+    },
+    {
+      "n": 6,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_confirmar_y_doble_confirmacion_409",
+      "que_se_verifica": "Confirmar O002 funciona; confirmarlo otra vez es un conflicto.",
+      "resultado_esperado": "200 y luego 409",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 20.4
+    },
+    {
+      "n": 7,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_confirmar_invalido_422[O003]",
+      "que_se_verifica": "Confirmar O003 (cliente inactivo o sin artículos) son datos inválidos.",
+      "resultado_esperado": "422",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 11.9
+    },
+    {
+      "n": 8,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_confirmar_invalido_422[O007]",
+      "que_se_verifica": "Confirmar O007 (cliente inactivo o sin artículos) son datos inválidos.",
+      "resultado_esperado": "422",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 11.5
+    },
+    {
+      "n": 9,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_flujo_completo_y_reglas_de_envio",
+      "que_se_verifica": "Flujo O016 hasta DELIVERED; envío sin guía da 422; cancelar O014 enviado da 409.",
+      "resultado_esperado": "DELIVERED, 422 y 409",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 78.1
+    },
+    {
+      "n": 10,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_cancelar_y_devolver",
+      "que_se_verifica": "O002 se cancela con motivo; O015 se devuelve desde SHIPPED.",
+      "resultado_esperado": "CANCELLED y RETURNED",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 45.8
+    },
+    {
+      "n": 11,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_checkout_con_pasarela_simulada[O001-aprobado-200]",
+      "que_se_verifica": "Swagger: cobrar O001 con la pasarela simulada respondiendo 'aprobado'.",
+      "resultado_esperado": "HTTP 200",
+      "resultado_real": "HTTP 200: Pago aprobado por $1890.00 MXN y pedido guardado",
+      "estado": "PASÓ",
+      "duracion_ms": 23.8
+    },
+    {
+      "n": 12,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_checkout_con_pasarela_simulada[O002-rechazado-402]",
+      "que_se_verifica": "Swagger: cobrar O002 con la pasarela simulada respondiendo 'rechazado'.",
+      "resultado_esperado": "HTTP 402",
+      "resultado_real": "HTTP 402: Pago rechazado: el pedido O002 sigue en DRAFT y no se guardó",
+      "estado": "PASÓ",
+      "duracion_ms": 12.3
+    },
+    {
+      "n": 13,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_checkout_con_pasarela_simulada[O006-timeout-503]",
+      "que_se_verifica": "Swagger: cobrar O006 con la pasarela simulada respondiendo 'timeout'.",
+      "resultado_esperado": "HTTP 503",
+      "resultado_real": "HTTP 503: La pasarela no respondió (timeout); intenta más tarde",
+      "estado": "PASÓ",
+      "duracion_ms": 10.9
+    },
+    {
+      "n": 14,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_checkout_con_pasarela_simulada[O007-aprobado-422]",
+      "que_se_verifica": "Swagger: cobrar O007 con la pasarela simulada respondiendo 'aprobado'.",
+      "resultado_esperado": "HTTP 422",
+      "resultado_real": "HTTP 422: Requiere artículos y cliente activo",
+      "estado": "PASÓ",
+      "duracion_ms": 11.1
+    },
+    {
+      "n": 15,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_checkout_de_pedido_ya_confirmado_409",
+      "que_se_verifica": "Cobrar un pedido que ya está confirmado es un conflicto.",
+      "resultado_esperado": "409",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 22.2
+    },
+    {
+      "n": 16,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_resultados_sin_ejecucion_previa",
+      "que_se_verifica": "Si nunca se han corrido las pruebas, la API lo explica en español.",
+      "resultado_esperado": "404 con instrucción de usar POST /pruebas/ejecutar",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 10.4
+    },
+    {
+      "n": 17,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_resultados_legibles",
+      "que_se_verifica": "GET /pruebas/resultados traduce el reporte a frases que cualquiera entiende.",
+      "resultado_esperado": "conclusión con '1 de 2 pruebas FALLARON' y detalle Esperado/Real",
+      "resultado_real": "1 de 2 pruebas FALLARON. Revisa la lista 'pruebas_con_falla' para ver qué regla no se cumple.",
+      "estado": "PASÓ",
+      "duracion_ms": 13.0
+    },
+    {
+      "n": 18,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_ejecutar_pruebas_desde_swagger",
+      "que_se_verifica": "POST /pruebas/ejecutar corre pytest y responde el resumen (aquí pytest se simula).",
+      "resultado_esperado": "conclusión 'Las 1 pruebas pasaron' y código de salida 0",
+      "resultado_real": "Las 1 pruebas pasaron: todas las reglas de negocio verificadas funcionan como se esperaba.",
+      "estado": "PASÓ",
+      "duracion_ms": 14.7
+    },
+    {
+      "n": 19,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_ejecutar_pruebas_sin_reporte",
+      "que_se_verifica": "Si pytest no logra generar el reporte, la API lo informa.",
+      "resultado_esperado": "500",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 12.4
+    },
+    {
+      "n": 20,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_consultar_pedido",
+      "que_se_verifica": "Swagger muestra el pedido O001 como texto en español, no como código.",
+      "resultado_esperado": "texto con estado Borrador, total $2,100.00 y descuento 10 %",
+      "resultado_real": "PEDIDO O001 ... Descuento: 10 % (cliente VIP, compra mayor a $500 y al menos 4 unidades)",
+      "estado": "PASÓ",
+      "duracion_ms": 10.5
+    },
+    {
+      "n": 21,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_confirmar_y_explicar_conflicto",
+      "que_se_verifica": "Confirmar dos veces da un mensaje claro con el motivo y el estado actual.",
+      "resultado_esperado": "200 '✅ Pedido confirmado.' y luego 409 con 'Motivo:'",
+      "resultado_real": "❌ No se pudo confirmar el pedido O002. | Motivo: el pedido ya no está en borrador; solo un pedido nuevo se puede confirmar. | Estado actual del pedido: Confirmado. |",
+      "estado": "PASÓ",
+      "duracion_ms": 20.0
+    },
+    {
+      "n": 22,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_motivo_especifico[O003-el cliente est\\xe1 inactivo]",
+      "que_se_verifica": "Al confirmar O003 el mensaje dice exactamente por qué no se puede.",
+      "resultado_esperado": "422 con 'Motivo: el cliente está inactivo'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 10.8
+    },
+    {
+      "n": 23,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_motivo_especifico[O007-el pedido no tiene art\\xedculos]",
+      "que_se_verifica": "Al confirmar O007 el mensaje dice exactamente por qué no se puede.",
+      "resultado_esperado": "422 con 'Motivo: el pedido no tiene artículos'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 10.5
+    },
+    {
+      "n": 24,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_flujo_y_pedido_inexistente",
+      "que_se_verifica": "Enviar, entregar y un pedido inexistente también responden con frases claras.",
+      "resultado_esperado": "guía en el mensaje, 'Entregado' y 404 'No encontramos el pedido'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 45.6
+    },
+    {
+      "n": 25,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_datos_invalidos",
+      "que_se_verifica": "Si falta un dato obligatorio (la guía), se indica qué campo revisar.",
+      "resultado_esperado": "422 'Revisa este campo: tracking_number'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 9.1
+    },
+    {
+      "n": 26,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_cobro[O001-aprobado-Cobrado: $1,890.00 MXN]",
+      "que_se_verifica": "Cobro de O001 con pasarela 'aprobado' explicado en español.",
+      "resultado_esperado": "el mensaje incluye 'Cobrado: $1,890.00 MXN'",
+      "resultado_real": "✅ Pago aprobado.",
+      "estado": "PASÓ",
+      "duracion_ms": 11.9
+    },
+    {
+      "n": 27,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_cobro[O002-rechazado-El banco rechaz\\xf3 el pago]",
+      "que_se_verifica": "Cobro de O002 con pasarela 'rechazado' explicado en español.",
+      "resultado_esperado": "el mensaje incluye 'El banco rechazó el pago'",
+      "resultado_real": "❌ El banco rechazó el pago.",
+      "estado": "PASÓ",
+      "duracion_ms": 16.0
+    },
+    {
+      "n": 28,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_cobro[O006-timeout-El servicio de pagos no respondi\\xf3]",
+      "que_se_verifica": "Cobro de O006 con pasarela 'timeout' explicado en español.",
+      "resultado_esperado": "el mensaje incluye 'El servicio de pagos no respondió'",
+      "resultado_real": "⚠️ El servicio de pagos no respondió.",
+      "estado": "PASÓ",
+      "duracion_ms": 10.1
+    },
+    {
+      "n": 29,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_cobro[O007-aprobado-No se intent\\xf3 ning\\xfan cargo]",
+      "que_se_verifica": "Cobro de O007 con pasarela 'aprobado' explicado en español.",
+      "resultado_esperado": "el mensaje incluye 'No se intentó ningún cargo'",
+      "resultado_real": "❌ No se pudo cobrar el pedido O007.",
+      "estado": "PASÓ",
+      "duracion_ms": 10.8
+    },
+    {
+      "n": 30,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_resultados_de_pruebas",
+      "que_se_verifica": "El resumen de pruebas también sale como texto con íconos y fallas explicadas.",
+      "resultado_esperado": "'❌ 1 de 2 pruebas FALLARON' y la regla B con Esperado/Real",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 22.6
+    },
+    {
+      "n": 31,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_reiniciar_datos",
+      "que_se_verifica": "POST /reiniciar devuelve los pedidos a su estado inicial sin apagar el servidor.",
+      "resultado_esperado": "O002 vuelve a Borrador después de confirmarlo",
+      "resultado_real": "✅ Datos reiniciados: 16 pedidos en Borrador y 0 cobros.",
+      "estado": "PASÓ",
+      "duracion_ms": 33.6
+    },
+    {
+      "n": 32,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_cobro_duplicado_en_bd_se_explica",
+      "que_se_verifica": "Si el pedido ya estaba guardado como cobrado, se explica y se reembolsa (no error 500).",
+      "resultado_esperado": "409 'ya estaba registrado como cobrado'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 24.3
+    },
+    {
+      "n": 33,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_motivo_del_descuento[O006-Descuento: 5 % (compra mayor a $5,000)]",
+      "que_se_verifica": "El cliente lee por qué su pedido O006 tiene (o no) descuento.",
+      "resultado_esperado": "'Descuento: 5 % (compra mayor a $5,000)'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 8.9
+    },
+    {
+      "n": 34,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_motivo_del_descuento[O005-Descuento: 0 % (no aplica porque el pedido ya tiene una promoci\\xf3n activa)]",
+      "que_se_verifica": "El cliente lee por qué su pedido O005 tiene (o no) descuento.",
+      "resultado_esperado": "'Descuento: 0 % (no aplica porque el pedido ya tiene una promoción activa)'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 9.7
+    },
+    {
+      "n": 35,
+      "modulo": "API REST de TechStore con Swagger (pruebas de punta a punta con TestClient)",
+      "prueba": "tests/test_api.py::test_texto_motivo_del_descuento[O002-Descuento: 0 % (no aplica; no cumple las condiciones de descuento)]",
+      "que_se_verifica": "El cliente lee por qué su pedido O002 tiene (o no) descuento.",
+      "resultado_esperado": "'Descuento: 0 % (no aplica; no cumple las condiciones de descuento)'",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 8.4
+    },
+    {
+      "n": 36,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP01]",
+      "que_se_verifica": "CP01: cliente regular confirma pedido de $120 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 120.00",
+      "resultado_real": "CONFIRMED, cobro 120.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 37,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP02]",
+      "que_se_verifica": "CP02: cliente VIP confirma pedido de $200 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 170.00",
+      "resultado_real": "CONFIRMED, cobro 170.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 38,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP03]",
+      "que_se_verifica": "CP03: cliente regular confirma pedido de $150 (deuda $500, estado inicial NEW, escenario DEUDA)",
+      "resultado_esperado": "CustomerHasDebt",
+      "resultado_real": "CustomerHasDebt",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 39,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP04]",
+      "que_se_verifica": "CP04: cliente regular confirma pedido de $0 (deuda $0, estado inicial NEW, escenario TOTAL_CERO)",
+      "resultado_esperado": "ValueError",
+      "resultado_real": "ValueError",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 40,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP05]",
+      "que_se_verifica": "CP05: cliente regular confirma pedido de $-10 (deuda $0, estado inicial NEW, escenario TOTAL_NEGATIVO)",
+      "resultado_esperado": "ValueError",
+      "resultado_real": "ValueError",
+      "estado": "PASÓ",
+      "duracion_ms": 0.7
+    },
+    {
+      "n": 41,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP06]",
+      "que_se_verifica": "CP06: cliente VIP confirma pedido de $1000 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 850.00",
+      "resultado_real": "CONFIRMED, cobro 850.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 42,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP07]",
+      "que_se_verifica": "CP07: cliente VIP confirma pedido de $0.01 (deuda $0, estado inicial NEW, escenario LIMITE)",
+      "resultado_esperado": "CONFIRMED, cobro 0.01",
+      "resultado_real": "CONFIRMED, cobro 0.01",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 43,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP08]",
+      "que_se_verifica": "CP08: cliente regular confirma pedido de $250 (deuda $0, estado inicial CONFIRMED, escenario YA_CONFIRMADO)",
+      "resultado_esperado": "ValueError",
+      "resultado_real": "ValueError",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 44,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP09]",
+      "que_se_verifica": "CP09: cliente VIP confirma pedido de $300 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 255.00",
+      "resultado_real": "CONFIRMED, cobro 255.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 45,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP10]",
+      "que_se_verifica": "CP10: cliente regular confirma pedido de $75 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 75.00",
+      "resultado_real": "CONFIRMED, cobro 75.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 46,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP11]",
+      "que_se_verifica": "CP11: cliente VIP confirma pedido de $500 (deuda $250, estado inicial NEW, escenario DEUDA)",
+      "resultado_esperado": "CustomerHasDebt",
+      "resultado_real": "CustomerHasDebt",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 47,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_caso_confirmar_desde_csv[CP12]",
+      "que_se_verifica": "CP12: cliente VIP confirma pedido de $99.99 (deuda $0, estado inicial NEW, escenario VALIDO)",
+      "resultado_esperado": "CONFIRMED, cobro 84.99",
+      "resultado_real": "CONFIRMED, cobro 84.99",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 48,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_cp13_pago_rechazado_con_mock",
+      "que_se_verifica": "CP13: la pasarela (mock) rechaza el pago del pedido 1.",
+      "resultado_esperado": "RuntimeError: payment rejected",
+      "resultado_real": "RuntimeError: payment rejected",
+      "estado": "PASÓ",
+      "duracion_ms": 3.2
+    },
+    {
+      "n": 49,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_cp14_persistencia_commit",
+      "que_se_verifica": "CP14: un pedido guardado con COMMIT es visible después.",
+      "resultado_esperado": "Registro visible después de commit",
+      "resultado_real": "registro visible: OrderRow(id=1, total=120.0, status=NEW)",
+      "estado": "PASÓ",
+      "duracion_ms": 13.3
+    },
+    {
+      "n": 50,
+      "modulo": "Casos de prueba del profesor (CP01-CP15) leídos desde datos/casos_de_prueba.csv",
+      "prueba": "tests/test_casos_csv.py::test_cp15_persistencia_rollback",
+      "que_se_verifica": "CP15: un pedido revertido con ROLLBACK no queda guardado.",
+      "resultado_esperado": "Registro ausente después de rollback",
+      "resultado_real": "registro: None",
+      "estado": "PASÓ",
+      "duracion_ms": 6.0
+    },
+    {
+      "n": 51,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_vip_discount",
+      "que_se_verifica": "Un cliente VIP con pedido de $100 recibe 15% de descuento.",
+      "resultado_esperado": "cobro de $85.00 y estado CONFIRMED",
+      "resultado_real": "cobro $85.00, estado CONFIRMED",
+      "estado": "PASÓ",
+      "duracion_ms": 0.9
+    },
+    {
+      "n": 52,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_regular_no_discount",
+      "que_se_verifica": "Un cliente regular con pedido de $100 NO recibe descuento.",
+      "resultado_esperado": "cobro de $100.00",
+      "resultado_real": "cobro $100.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 53,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_customer_debt",
+      "que_se_verifica": "Un cliente con deuda pendiente no puede confirmar su pedido.",
+      "resultado_esperado": "error CustomerHasDebt (pedido rechazado)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 54,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_invalid_total[0]",
+      "que_se_verifica": "Un pedido con total de $0 (cero o negativo) se rechaza.",
+      "resultado_esperado": "error ValueError (total inválido)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 55,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_invalid_total[-1]",
+      "que_se_verifica": "Un pedido con total de $-1 (cero o negativo) se rechaza.",
+      "resultado_esperado": "error ValueError (total inválido)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 56,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_vip_200_paga_170",
+      "que_se_verifica": "Un cliente VIP con pedido de $200 paga $170 (15% de descuento = $30).",
+      "resultado_esperado": "cobro de $170.00 y descuento de $30.00",
+      "resultado_real": "cobro $170.00, descuento $30.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 57,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_regular_200_paga_200",
+      "que_se_verifica": "Un cliente regular con pedido de $200 paga el total completo.",
+      "resultado_esperado": "cobro de $200.00 y descuento de $0.00",
+      "resultado_real": "cobro $200.00, descuento $0.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 58,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_total_minimo_valido",
+      "que_se_verifica": "Caso límite: el total más pequeño posible ($0.01) sí se acepta.",
+      "resultado_esperado": "cobro de $0.01",
+      "resultado_real": "cobro $0.01",
+      "estado": "PASÓ",
+      "duracion_ms": 1.4
+    },
+    {
+      "n": 59,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_deuda_cero_si_permite",
+      "que_se_verifica": "Caso límite: deuda exactamente de $0 NO bloquea la confirmación.",
+      "resultado_esperado": "pedido CONFIRMED",
+      "resultado_real": "estado CONFIRMED",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 60,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_total_invalido_tiene_prioridad_sobre_deuda",
+      "que_se_verifica": "Si el total es inválido y además hay deuda, primero se reporta el total inválido.",
+      "resultado_esperado": "error ValueError (no CustomerHasDebt)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.1
+    },
+    {
+      "n": 61,
+      "modulo": "Reglas del pedido (pruebas unitarias del dominio)",
+      "prueba": "tests/test_order.py::test_cannot_confirm_twice",
+      "que_se_verifica": "TDD: un pedido que ya fue confirmado NO puede confirmarse otra vez.",
+      "resultado_esperado": "error ValueError \"already confirmed\"",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 62,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_repository_commit",
+      "que_se_verifica": "Un pedido guardado y confirmado con COMMIT queda registrado en la base de datos.",
+      "resultado_esperado": "el pedido id=1 existe con total $120",
+      "resultado_real": "id=1, total=$120.00",
+      "estado": "PASÓ",
+      "duracion_ms": 4.3
+    },
+    {
+      "n": 63,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_repository_rollback",
+      "que_se_verifica": "Si se hace ROLLBACK, el pedido que se iba a guardar se descarta.",
+      "resultado_esperado": "al buscar el pedido id=1 no existe (None)",
+      "resultado_real": "registro encontrado: None",
+      "estado": "PASÓ",
+      "duracion_ms": 2.2
+    },
+    {
+      "n": 64,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_guardar_pedido_250_con_commit",
+      "que_se_verifica": "Un pedido de $250 confirmado se guarda con id=2 y conserva total y estado.",
+      "resultado_esperado": "id=2, total $250.00, estado CONFIRMED",
+      "resultado_real": "id=2, total=$250.00, estado CONFIRMED",
+      "estado": "PASÓ",
+      "duracion_ms": 4.2
+    },
+    {
+      "n": 65,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_commit_sobrevive_a_un_rollback_posterior",
+      "que_se_verifica": "Lo que ya se confirmó con COMMIT no se pierde si después se hace ROLLBACK de otro cambio.",
+      "resultado_esperado": "el pedido 1 sigue existiendo y el pedido 2 no",
+      "resultado_real": "pedido 1: True, pedido 2: False",
+      "estado": "PASÓ",
+      "duracion_ms": 6.3
+    },
+    {
+      "n": 66,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_id_duplicado_se_rechaza_y_se_revierte",
+      "que_se_verifica": "Restricción de unicidad: no se pueden guardar dos pedidos con el mismo id.",
+      "resultado_esperado": "error IntegrityError y el pedido original ($100) queda intacto",
+      "resultado_real": "IntegrityError; pedido 1 conserva total $100.00",
+      "estado": "PASÓ",
+      "duracion_ms": 4.4
+    },
+    {
+      "n": 67,
+      "modulo": "Persistencia con base de datos (pruebas de integración con SQLAlchemy + SQLite en memoria)",
+      "prueba": "tests/test_repository.py::test_buscar_pedido_inexistente",
+      "que_se_verifica": "Buscar un pedido que nunca se guardó regresa vacío (no truena).",
+      "resultado_esperado": "None",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.8
+    },
+    {
+      "n": 68,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_owner_within_24h",
+      "que_se_verifica": "El dueño del pedido puede cancelarlo durante las primeras 24 horas (1 h de antigüedad).",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 69,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_stranger_denied",
+      "que_se_verifica": "Un usuario que NO es dueño ni administrador no puede cancelar un pedido ajeno.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 70,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_shipped_denied_even_admin",
+      "que_se_verifica": "Un pedido ENVIADO (SHIPPED) no se cancela, ni siquiera por un administrador.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 71,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_expired_denied",
+      "que_se_verifica": "El dueño ya no puede cancelar después de 25 horas.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 72,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_admin_cancela_pedido_new_de_otro_usuario",
+      "que_se_verifica": "Un ADMINISTRADOR puede cancelar el pedido NEW de otro usuario.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 73,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_dueno_exactamente_a_las_24_horas_se_rechaza",
+      "que_se_verifica": "Caso límite: el dueño intenta cancelar EXACTAMENTE a las 24 horas.",
+      "resultado_esperado": "DENEGADO (la regla es 'menos de 24 h')",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 74,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_dueno_un_segundo_antes_de_24_horas",
+      "que_se_verifica": "Caso límite: al dueño le falta 1 segundo para cumplir 24 horas.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 75,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[administrador-no-NEW-1-PERMITIDO]",
+      "que_se_verifica": "Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 1 h.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "PERMITIDO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 76,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[administrador-no-NEW-72-PERMITIDO]",
+      "que_se_verifica": "Matriz: administrador (¿dueño? no) intenta cancelar pedido NEW de 72 h.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "PERMITIDO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 77,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[administrador-s\\xed-CONFIRMED-30-PERMITIDO]",
+      "que_se_verifica": "Matriz: administrador (¿dueño? sí) intenta cancelar pedido CONFIRMED de 30 h.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "PERMITIDO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 78,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[administrador-s\\xed-SHIPPED-1-DENEGADO]",
+      "que_se_verifica": "Matriz: administrador (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "DENEGADO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 79,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-s\\xed-NEW-1-PERMITIDO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 1 h.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "PERMITIDO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.3
+    },
+    {
+      "n": 80,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-s\\xed-CONFIRMED-23-PERMITIDO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? sí) intenta cancelar pedido CONFIRMED de 23 h.",
+      "resultado_esperado": "PERMITIDO",
+      "resultado_real": "PERMITIDO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 81,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-s\\xed-NEW-24-DENEGADO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? sí) intenta cancelar pedido NEW de 24 h.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "DENEGADO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 82,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-s\\xed-SHIPPED-1-DENEGADO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? sí) intenta cancelar pedido SHIPPED de 1 h.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "DENEGADO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 83,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-no-NEW-1-DENEGADO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? no) intenta cancelar pedido NEW de 1 h.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "DENEGADO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 84,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_matriz_de_autorizacion[cliente-no-SHIPPED-1-DENEGADO]",
+      "que_se_verifica": "Matriz: cliente (¿dueño? no) intenta cancelar pedido SHIPPED de 1 h.",
+      "resultado_esperado": "DENEGADO",
+      "resultado_real": "DENEGADO",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 85,
+      "modulo": "Seguridad: quién puede cancelar un pedido (autorización)",
+      "prueba": "tests/test_security.py::test_sin_now_usa_la_hora_actual",
+      "que_se_verifica": "Si no se pasa 'now', la política usa la hora actual del sistema.",
+      "resultado_esperado": "pedido recién creado por su dueño -> PERMITIDO",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 86,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_gateway_approved",
+      "que_se_verifica": "Si la pasarela APRUEBA el pago, el servicio devuelve el importe cobrado.",
+      "resultado_esperado": "se cobra $100 una sola vez",
+      "resultado_real": "cobro $100.00; llamadas a charge: [call(100.0)]",
+      "estado": "PASÓ",
+      "duracion_ms": 2.0
+    },
+    {
+      "n": 87,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_gateway_rejected",
+      "que_se_verifica": "Si la pasarela RECHAZA el pago, el servicio lanza un error.",
+      "resultado_esperado": "RuntimeError \"payment rejected\"",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 88,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_vip_200_rechazado_intenta_cobrar_170",
+      "que_se_verifica": "Pago RECHAZADO de un pedido VIP de $200: se intentó cobrar $170 y se lanzó error.",
+      "resultado_esperado": "charge(170) llamado una vez y RuntimeError",
+      "resultado_real": "charge llamado con (170.0,); RuntimeError",
+      "estado": "PASÓ",
+      "duracion_ms": 0.7
+    },
+    {
+      "n": 89,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_pago_rechazado_no_deja_pedido_confirmado",
+      "que_se_verifica": "Mejora de consistencia (TDD): si el pago se rechaza, el pedido NO debe quedar confirmado.",
+      "resultado_esperado": "el pedido sigue en estado NEW",
+      "resultado_real": "estado del pedido: NEW",
+      "estado": "PASÓ",
+      "duracion_ms": 0.9
+    },
+    {
+      "n": 90,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_pasarela_no_responde_timeout",
+      "que_se_verifica": "Si la pasarela no responde (timeout), se informa 'servicio no disponible' y no se confirma.",
+      "resultado_esperado": "PaymentUnavailable y pedido en NEW",
+      "resultado_real": "PaymentUnavailable; estado NEW",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 91,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_cliente_con_deuda_no_llega_a_la_pasarela",
+      "que_se_verifica": "Si el cliente tiene deuda, el pedido se rechaza ANTES de intentar cobrar.",
+      "resultado_esperado": "CustomerHasDebt y la pasarela nunca se llama",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 92,
+      "modulo": "Cobro con pasarela de pago simulada (mocks: no se cobra dinero real)",
+      "prueba": "tests/test_service.py::test_total_invalido_no_llega_a_la_pasarela",
+      "que_se_verifica": "Un pedido con total $0 se rechaza sin intentar cobrar.",
+      "resultado_esperado": "ValueError y la pasarela nunca se llama",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 93,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_guardar_pedido_con_commit",
+      "que_se_verifica": "Un pedido de TechStore guardado con COMMIT se puede consultar después.",
+      "resultado_esperado": "O001 en BD con total $2100.00 y 4 unidades",
+      "resultado_real": "O001: total $2100.00, 4 unidades, DRAFT",
+      "estado": "PASÓ",
+      "duracion_ms": 4.3
+    },
+    {
+      "n": 94,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_rollback_descarta_el_pedido",
+      "que_se_verifica": "Con ROLLBACK el pedido no queda guardado.",
+      "resultado_esperado": "O002 no existe en BD",
+      "resultado_real": "registro: None",
+      "estado": "PASÓ",
+      "duracion_ms": 4.6
+    },
+    {
+      "n": 95,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_id_de_pedido_duplicado_se_rechaza",
+      "que_se_verifica": "Restricción de unicidad: no puede haber dos pedidos con el mismo id.",
+      "resultado_esperado": "IntegrityError y solo 1 registro",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 6.9
+    },
+    {
+      "n": 96,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_cobro_aprobado_aplica_descuento_y_guarda",
+      "que_se_verifica": "Pago APROBADO de O001 (VIP, $2100, 10 % de descuento): se cobra $1890 y se guarda.",
+      "resultado_esperado": "charge('O001', 1890.00), estado CONFIRMED y 1 registro en BD",
+      "resultado_real": "cobrado $1890.00, estado CONFIRMED, guardado con cargo $1890.00",
+      "estado": "PASÓ",
+      "duracion_ms": 3.8
+    },
+    {
+      "n": 97,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_cobro_rechazado_no_confirma_ni_guarda",
+      "que_se_verifica": "Pago RECHAZADO: el pedido no se confirma y no se guarda nada.",
+      "resultado_esperado": "PagoRechazado, O002 sigue en DRAFT y 0 registros",
+      "resultado_real": "estado DRAFT, registros en BD: 0",
+      "estado": "PASÓ",
+      "duracion_ms": 2.4
+    },
+    {
+      "n": 98,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_pasarela_timeout",
+      "que_se_verifica": "La pasarela no responde (timeout).",
+      "resultado_esperado": "PasarelaNoDisponible y el pedido sigue en DRAFT",
+      "resultado_real": "estado DRAFT",
+      "estado": "PASÓ",
+      "duracion_ms": 1.0
+    },
+    {
+      "n": 99,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_regla_rota_no_llega_a_la_pasarela[O003-InvalidOrderData]",
+      "que_se_verifica": "Si O003 no puede confirmarse (cliente inactivo / sin artículos) NO se intenta cobrar.",
+      "resultado_esperado": "error de dominio y charge nunca llamado",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 100,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_regla_rota_no_llega_a_la_pasarela[O007-InvalidOrderData]",
+      "que_se_verifica": "Si O007 no puede confirmarse (cliente inactivo / sin artículos) NO se intenta cobrar.",
+      "resultado_esperado": "error de dominio y charge nunca llamado",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 101,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_pedido_ya_confirmado_no_se_cobra_dos_veces",
+      "que_se_verifica": "Un pedido ya confirmado no se vuelve a cobrar.",
+      "resultado_esperado": "InvalidOrderTransition y charge llamado solo 1 vez",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 4.6
+    },
+    {
+      "n": 102,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_falla_de_bd_reembolsa_el_cobro",
+      "que_se_verifica": "Si la BD falla después de cobrar, se hace rollback y se REEMBOLSA (compensación).",
+      "resultado_esperado": "IntegrityError y refund('O001', 1890.00)",
+      "resultado_real": "refund llamado con ('O001', Decimal('1890.00'))",
+      "estado": "PASÓ",
+      "duracion_ms": 7.1
+    },
+    {
+      "n": 103,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_importe_a_cobrar[O001-1890.00]",
+      "que_se_verifica": "Importe a cobrar del pedido O001 (total menos descuento).",
+      "resultado_esperado": "$1890.00",
+      "resultado_real": "$1890.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 104,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_importe_a_cobrar[O006-17100.00]",
+      "que_se_verifica": "Importe a cobrar del pedido O006 (total menos descuento).",
+      "resultado_esperado": "$17100.00",
+      "resultado_real": "$17100.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 105,
+      "modulo": "TechStore: persistencia en BD y cobro con pasarela simulada (integración + mocks)",
+      "prueba": "tests/test_techstore_integracion.py::test_importe_a_cobrar[O002-1050.00]",
+      "que_se_verifica": "Importe a cobrar del pedido O002 (total menos descuento).",
+      "resultado_esperado": "$1050.00",
+      "resultado_real": "$1050.00",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 106,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r1_exito_20_unidades_exactas",
+      "que_se_verifica": "R1 éxito: el pedido O008 con 20 unidades exactas sí se puede confirmar.",
+      "resultado_esperado": "estado CONFIRMED",
+      "resultado_real": "20 unidades, estado CONFIRMED",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 107,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r1_error_agregar_hasta_21_unidades",
+      "que_se_verifica": "R1 error: O009 tiene 19 unidades y se intentan agregar 2 más (21).",
+      "resultado_esperado": "OrderItemLimitExceeded y el pedido se queda con 19 unidades",
+      "resultado_real": "rechazado; el pedido sigue con 19 unidades",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 108,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r1_limite_19_mas_1_llega_a_20",
+      "que_se_verifica": "R1 límite: O009 tiene 19 unidades y se agrega 1 (justo 20).",
+      "resultado_esperado": "se acepta, 20 unidades",
+      "resultado_real": "20 unidades",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 109,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r1_cuenta_unidades_no_renglones",
+      "que_se_verifica": "R1 límite: dos renglones de 10 unidades suman 20 (permitido); uno más de 1 ya no.",
+      "resultado_esperado": "20 unidades aceptadas y luego OrderItemLimitExceeded",
+      "resultado_real": "2 renglones, 20 unidades",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 110,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r1_no_se_agregan_articulos_despues_de_confirmar",
+      "que_se_verifica": "R1 error: después de confirmar ya no se pueden agregar artículos.",
+      "resultado_esperado": "InvalidOrderTransition",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 111,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O001-10-VIP, total $2100, 4 unidades, sin promoci\\xf3n]",
+      "que_se_verifica": "R2: pedido O001 -> VIP, total $2100, 4 unidades, sin promoción.",
+      "resultado_esperado": "descuento de 10 %",
+      "resultado_real": "descuento de 10 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 112,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O006-5-total mayor a $5000, sin promoci\\xf3n]",
+      "que_se_verifica": "R2: pedido O006 -> total mayor a $5000, sin promoción.",
+      "resultado_esperado": "descuento de 5 %",
+      "resultado_real": "descuento de 5 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 113,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O002-0-no VIP y total menor a $5000]",
+      "que_se_verifica": "R2: pedido O002 -> no VIP y total menor a $5000.",
+      "resultado_esperado": "descuento de 0 %",
+      "resultado_real": "descuento de 0 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 114,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O005-0-promoci\\xf3n activa bloquea el descuento]",
+      "que_se_verifica": "R2: pedido O005 -> promoción activa bloquea el descuento.",
+      "resultado_esperado": "descuento de 0 %",
+      "resultado_real": "descuento de 0 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 115,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O010-0-total EXACTAMENTE $500 (la regla es > 500)]",
+      "que_se_verifica": "R2: pedido O010 -> total EXACTAMENTE $500 (la regla es > 500).",
+      "resultado_esperado": "descuento de 0 %",
+      "resultado_real": "descuento de 0 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 116,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_descuento_por_pedido[O011-0-VIP con solo 3 unidades (requiere 4)]",
+      "que_se_verifica": "R2: pedido O011 -> VIP con solo 3 unidades (requiere 4).",
+      "resultado_esperado": "descuento de 0 %",
+      "resultado_real": "descuento de 0 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 117,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_limite_prioridad_10_sobre_5",
+      "que_se_verifica": "R2 límite: un VIP con $5,500 y 5 unidades cumple AMBAS reglas.",
+      "resultado_esperado": "se aplica el 10 % (tiene prioridad)",
+      "resultado_real": "descuento de 10 %",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 118,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_limite_umbrales",
+      "que_se_verifica": "R2 límite: $500 exactos NO superan el mínimo; 4 unidades exactas SÍ cumplen el mínimo.",
+      "resultado_esperado": "monto mínimo = No, unidades mínimas = Sí",
+      "resultado_real": "monto mínimo = No, unidades mínimas = Sí",
+      "estado": "PASÓ",
+      "duracion_ms": 1.1
+    },
+    {
+      "n": 119,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_or_algun_descuento",
+      "que_se_verifica": "R2: la combinación OR detecta si el pedido tiene algún descuento.",
+      "resultado_esperado": "O001 sí, O006 sí, O002 no",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 120,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r2_specification_no_modifica_el_pedido",
+      "que_se_verifica": "R2: evaluar un descuento no cambia nada del pedido (solo consulta).",
+      "resultado_esperado": "estado, unidades, total y eventos iguales",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 121,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_exito_flujo_completo_hasta_entregado",
+      "que_se_verifica": "R3 éxito: O016 pasa por DRAFT -> CONFIRMED -> SHIPPED -> DELIVERED.",
+      "resultado_esperado": "DELIVERED con 3 eventos",
+      "resultado_real": "DELIVERED, eventos ['OrderConfirmed', 'OrderShipped', 'OrderDelivered']",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 122,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_error_cancelar_pedido_enviado",
+      "que_se_verifica": "R3 error: O014 ya fue enviado y se intenta cancelar.",
+      "resultado_esperado": "InvalidOrderTransition y sigue en SHIPPED",
+      "resultado_real": "rechazado; estado SHIPPED",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 123,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_limite_doble_confirmacion_sin_evento_extra",
+      "que_se_verifica": "R3 límite: O013 se confirma dos veces; la segunda se rechaza.",
+      "resultado_esperado": "InvalidOrderTransition y solo 1 evento OrderConfirmed",
+      "resultado_real": "eventos ['OrderConfirmed']",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 124,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_envio_sin_guia[]",
+      "que_se_verifica": "R3 error: enviar O012 con guía vacía ('').",
+      "resultado_esperado": "InvalidOrderData y sigue CONFIRMED",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 125,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_envio_sin_guia[   ]",
+      "que_se_verifica": "R3 error: enviar O012 con guía vacía ('   ').",
+      "resultado_esperado": "InvalidOrderData y sigue CONFIRMED",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 126,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_no_se_confirma[O003-cliente inactivo]",
+      "que_se_verifica": "R3 error: no se confirma O003 (cliente inactivo).",
+      "resultado_esperado": "InvalidOrderData, sigue en DRAFT y sin eventos",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 127,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_no_se_confirma[O007-pedido sin art\\xedculos]",
+      "que_se_verifica": "R3 error: no se confirma O007 (pedido sin artículos).",
+      "resultado_esperado": "InvalidOrderData, sigue en DRAFT y sin eventos",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 128,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_cancelacion_valida_y_sin_motivo",
+      "que_se_verifica": "R3: cancelar sin motivo se rechaza; con motivo, el pedido queda CANCELLED.",
+      "resultado_esperado": "InvalidOrderData y luego CANCELLED",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.7
+    },
+    {
+      "n": 129,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_r3_devolucion_y_entrega_desde_draft",
+      "que_se_verifica": "R3: O015 se devuelve desde SHIPPED; O016 no puede entregarse estando en DRAFT.",
+      "resultado_esperado": "RETURNED e InvalidOrderTransition",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.3
+    },
+    {
+      "n": 130,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_value_objects_invalidos",
+      "que_se_verifica": "Money no acepta montos negativos ni sumar monedas distintas; un artículo no tiene 0 piezas.",
+      "resultado_esperado": "InvalidOrderData en los tres casos",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 131,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_solo_se_aceptan_pesos_mexicanos",
+      "que_se_verifica": "Un artículo con precio en dólares no se puede agregar al pedido.",
+      "resultado_esperado": "InvalidOrderData",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 132,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E01]",
+      "que_se_verifica": "E01: O001 - evaluar_descuento (AND VIP + monto >500 + unidades >=4 + NOT promo)",
+      "resultado_esperado": "10%",
+      "resultado_real": "10% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.1
+    },
+    {
+      "n": 133,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E02]",
+      "que_se_verifica": "E02: O002 - evaluar_descuento (No VIP, total menor a 5000)",
+      "resultado_esperado": "0%",
+      "resultado_real": "0% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 3.3
+    },
+    {
+      "n": 134,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E03]",
+      "que_se_verifica": "E03: O003 - confirmar (Cliente inactivo)",
+      "resultado_esperado": "rechazo",
+      "resultado_real": "rechazo (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.3
+    },
+    {
+      "n": 135,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E04]",
+      "que_se_verifica": "E04: O005 - evaluar_descuento (Promocion activa bloquea descuento)",
+      "resultado_esperado": "0%",
+      "resultado_real": "0% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.3
+    },
+    {
+      "n": 136,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E05]",
+      "que_se_verifica": "E05: O006 - evaluar_descuento (OR total >5000 y sin promocion)",
+      "resultado_esperado": "5%",
+      "resultado_real": "5% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 3.1
+    },
+    {
+      "n": 137,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E06]",
+      "que_se_verifica": "E06: O007 - confirmar (Pedido sin articulos)",
+      "resultado_esperado": "rechazo",
+      "resultado_real": "rechazo (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.3
+    },
+    {
+      "n": 138,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E07]",
+      "que_se_verifica": "E07: O008 - confirmar (20 unidades permitidas)",
+      "resultado_esperado": "exito",
+      "resultado_real": "exito (estado final CONFIRMED)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.7
+    },
+    {
+      "n": 139,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E08]",
+      "que_se_verifica": "E08: O009 - agregar SKU003 x2 (21 unidades excede limite)",
+      "resultado_esperado": "rechazo",
+      "resultado_real": "rechazo (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.5
+    },
+    {
+      "n": 140,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E09]",
+      "que_se_verifica": "E09: O010 - evaluar_descuento (Umbral estricto >500)",
+      "resultado_esperado": "0%",
+      "resultado_real": "0% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.1
+    },
+    {
+      "n": 141,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E10]",
+      "que_se_verifica": "E10: O011 - evaluar_descuento (Solo 3 unidades, requiere 4)",
+      "resultado_esperado": "0%",
+      "resultado_real": "0% (estado final DRAFT)",
+      "estado": "PASÓ",
+      "duracion_ms": 3.3
+    },
+    {
+      "n": 142,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E11]",
+      "que_se_verifica": "E11: O012 - confirmar y enviar sin guia (La confirmacion es valida pero falta guia)",
+      "resultado_esperado": "rechazo posterior",
+      "resultado_real": "rechazo posterior (estado final CONFIRMED)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.1
+    },
+    {
+      "n": 143,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E12]",
+      "que_se_verifica": "E12: O013 - confirmar dos veces (No permite confirmar desde CONFIRMED)",
+      "resultado_esperado": "rechazo posterior",
+      "resultado_real": "rechazo posterior (estado final CONFIRMED)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.9
+    },
+    {
+      "n": 144,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E13]",
+      "que_se_verifica": "E13: O014 - confirmar, enviar y cancelar (No permite cancelar desde SHIPPED)",
+      "resultado_esperado": "rechazo posterior",
+      "resultado_real": "rechazo posterior (estado final SHIPPED)",
+      "estado": "PASÓ",
+      "duracion_ms": 3.4
+    },
+    {
+      "n": 145,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E14]",
+      "que_se_verifica": "E14: O015 - confirmar, enviar y devolver (Termina en RETURNED)",
+      "resultado_esperado": "exito",
+      "resultado_real": "exito (estado final RETURNED)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.2
+    },
+    {
+      "n": 146,
+      "modulo": "TechStore (Actividad 4): reglas de negocio del pedido (unidades, descuentos y estados)",
+      "prueba": "tests/test_techstore_reglas.py::test_escenarios_actividad4[E15]",
+      "que_se_verifica": "E15: O016 - confirmar, enviar y entregar (Termina en DELIVERED)",
+      "resultado_esperado": "exito",
+      "resultado_real": "exito (estado final DELIVERED)",
+      "estado": "PASÓ",
+      "duracion_ms": 2.6
+    },
+    {
+      "n": 147,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc21_vacuna_se_guarda_con_commit",
+      "que_se_verifica": "VC-21 (persistencia): registrar la Quíntuple con commit la deja en el expediente.",
+      "resultado_esperado": "1 aplicación guardada con lote L-2026-118 y refuerzo 25/11/2026",
+      "resultado_real": "1 registro: Vacuna(mascota=1, Quíntuple Canina, lote=L-2026-118, refuerzo=2026-11-25)",
+      "estado": "PASÓ",
+      "duracion_ms": 5.3
+    },
+    {
+      "n": 148,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc22_rollback_descarta_la_aplicacion",
+      "que_se_verifica": "VC-22 (persistencia): si se hace rollback, la aplicación no queda guardada.",
+      "resultado_esperado": "0 registros",
+      "resultado_real": "0 registros",
+      "estado": "PASÓ",
+      "duracion_ms": 2.7
+    },
+    {
+      "n": 149,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc23_la_bd_tambien_exige_lote[-Zoetis]",
+      "que_se_verifica": "VC-23 (persistencia, defensa en BD): insertar directo en la tabla sin lote o fabricante.",
+      "resultado_esperado": "IntegrityError por la restricción CHECK y nada guardado",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 5.7
+    },
+    {
+      "n": 150,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc23_la_bd_tambien_exige_lote[L-1-  ]",
+      "que_se_verifica": "VC-23 (persistencia, defensa en BD): insertar directo en la tabla sin lote o fabricante.",
+      "resultado_esperado": "IntegrityError por la restricción CHECK y nada guardado",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 4.7
+    },
+    {
+      "n": 151,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc24_recordatorio_se_envia_una_sola_vez",
+      "que_se_verifica": "VC-24 (mock éxito): a 48 h del refuerzo se envía el aviso por WhatsApp/correo (simulado).",
+      "resultado_esperado": "1 mensaje; al volver a ejecutar el proceso no se repite",
+      "resultado_real": "1a corrida {'enviados': 1, 'fallidos': 0}, 2a corrida {'enviados': 0, 'fallidos': 0}; mensaje: 'VetCare 24: el refuerzo de Quíntuple Canina es el 25/11/2026. Confirme o reagende su cita.'",
+      "estado": "PASÓ",
+      "duracion_ms": 7.1
+    },
+    {
+      "n": 152,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc25_todavia_no_toca_el_recordatorio",
+      "que_se_verifica": "VC-25 (mock límite): faltan más de 48 h (5 días) para el refuerzo.",
+      "resultado_esperado": "el notificador no se llama",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 5.7
+    },
+    {
+      "n": 153,
+      "modulo": "VetCare 24 (PIA): persistencia de vacunas y recordatorios con notificador simulado (mock)",
+      "prueba": "tests/test_vetcare_integracion.py::test_vc26_falla_del_proveedor_deja_pendiente",
+      "que_se_verifica": "VC-26 (mock con falla): WhatsApp no responde; el aviso queda pendiente para reintentar.",
+      "resultado_esperado": "1 fallido y en la siguiente corrida (proveedor ya responde) se envía",
+      "resultado_real": "1a corrida {'enviados': 0, 'fallidos': 1}, 2a corrida {'enviados': 1, 'fallidos': 0}",
+      "estado": "PASÓ",
+      "duracion_ms": 21.4
+    },
+    {
+      "n": 154,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc01_receta_sin_alergia_calcula_dosis_por_peso",
+      "que_se_verifica": "VC-01 (RN-04 éxito): recetar Meloxicam a Firulais (12 kg, alérgico solo a Penicilina).",
+      "resultado_esperado": "se agrega a la receta con dosis 12 kg x 0.1 = 1.2",
+      "resultado_real": "agregado Metacam, dosis total 1.2",
+      "estado": "PASÓ",
+      "duracion_ms": 1.3
+    },
+    {
+      "n": 155,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc02_principio_activo_alergeno_se_bloquea",
+      "que_se_verifica": "VC-02 (RN-04 error): recetar un fármaco con Penicilina a un paciente alérgico.",
+      "resultado_esperado": "AlergiaRegistrada y la receta queda vacía",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.9
+    },
+    {
+      "n": 156,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[PENICILINA]",
+      "que_se_verifica": "VC-03 (RN-04 límite): el médico escribe 'PENICILINA' (mayúsculas, espacios o acento).",
+      "resultado_esperado": "también se bloquea (AlergiaRegistrada)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.8
+    },
+    {
+      "n": 157,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[  penicilina ]",
+      "que_se_verifica": "VC-03 (RN-04 límite): el médico escribe '  penicilina ' (mayúsculas, espacios o acento).",
+      "resultado_esperado": "también se bloquea (AlergiaRegistrada)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.9
+    },
+    {
+      "n": 158,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc03_alergia_se_detecta_aunque_cambie_la_escritura[Penicil\\xedna]",
+      "que_se_verifica": "VC-03 (RN-04 límite): el médico escribe 'Penicilína' (mayúsculas, espacios o acento).",
+      "resultado_esperado": "también se bloquea (AlergiaRegistrada)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.6
+    },
+    {
+      "n": 159,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc04_sin_peso_no_se_puede_dosificar[None]",
+      "que_se_verifica": "VC-04 (RF-02 límite): paciente con peso None (no capturado en triaje).",
+      "resultado_esperado": "PesoRequerido",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.9
+    },
+    {
+      "n": 160,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc04_sin_peso_no_se_puede_dosificar[0]",
+      "que_se_verifica": "VC-04 (RF-02 límite): paciente con peso 0 (no capturado en triaje).",
+      "resultado_esperado": "PesoRequerido",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 2.0
+    },
+    {
+      "n": 161,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc05_datos_invalidos_de_receta_y_alergia",
+      "que_se_verifica": "VC-05 (RN-04 error): dosis por kilo en cero o alergia sin principio activo.",
+      "resultado_esperado": "ValueError en ambos casos",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.3
+    },
+    {
+      "n": 162,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc06_vacuna_base_refuerzo_a_21_dias",
+      "que_se_verifica": "VC-06 (RN-03 éxito): Quíntuple Canina con lote y fabricante aplicada el 04/11/2026.",
+      "resultado_esperado": "refuerzo el 25/11/2026 (21 días, US07)",
+      "resultado_real": "refuerzo 25/11/2026",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 163,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc07_vacuna_anual_refuerzo_a_365_dias",
+      "que_se_verifica": "VC-07 (RF-04 éxito): vacuna antirrábica con esquema anual aplicada el 04/11/2026.",
+      "resultado_esperado": "refuerzo el 04/11/2027 (365 días)",
+      "resultado_real": "refuerzo 04/11/2027",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 164,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[-Zoetis]",
+      "que_se_verifica": "VC-08 (RN-03 error/límite): lote '' y fabricante 'Zoetis'.",
+      "resultado_esperado": "LoteObligatorio (no se guarda la aplicación)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 1.0
+    },
+    {
+      "n": 165,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[L-1-]",
+      "que_se_verifica": "VC-08 (RN-03 error/límite): lote 'L-1' y fabricante ''.",
+      "resultado_esperado": "LoteObligatorio (no se guarda la aplicación)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 166,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc08_vacuna_sin_lote_o_fabricante_se_rechaza[   -Zoetis]",
+      "que_se_verifica": "VC-08 (RN-03 error/límite): lote '   ' y fabricante 'Zoetis'.",
+      "resultado_esperado": "LoteObligatorio (no se guarda la aplicación)",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 167,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc09_esquema_desconocido",
+      "que_se_verifica": "VC-09 (RF-04 error): esquema de vacunación que no existe en el catálogo.",
+      "resultado_esperado": "ValueError",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 168,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[48-True]",
+      "que_se_verifica": "VC-10 (RF-05 límite): faltan 48 h para el refuerzo.",
+      "resultado_esperado": "¿enviar recordatorio? True",
+      "resultado_real": "True",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 169,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[47-True]",
+      "que_se_verifica": "VC-10 (RF-05 límite): faltan 47 h para el refuerzo.",
+      "resultado_esperado": "¿enviar recordatorio? True",
+      "resultado_real": "True",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 170,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[49-False]",
+      "que_se_verifica": "VC-10 (RF-05 límite): faltan 49 h para el refuerzo.",
+      "resultado_esperado": "¿enviar recordatorio? False",
+      "resultado_real": "False",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 171,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc10_recordatorio_48_horas_antes[0-False]",
+      "que_se_verifica": "VC-10 (RF-05 límite): faltan 0 h para el refuerzo.",
+      "resultado_esperado": "¿enviar recordatorio? False",
+      "resultado_real": "False",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 172,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc11_nota_sin_firmar_se_edita_y_luego_se_firma",
+      "que_se_verifica": "VC-11 (RN-01 éxito): una nota en borrador se puede corregir y después se firma.",
+      "resultado_esperado": "texto corregido y nota firmada por la Dra. Ruiz",
+      "resultado_real": "'Otitis externa', firmada por Dra. Ruiz",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 173,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc12_nota_firmada_no_se_edita_ni_borra",
+      "que_se_verifica": "VC-12 (RN-01 error): intentar editar o borrar una nota ya firmada.",
+      "resultado_esperado": "NotaFirmada en ambos casos y el texto original intacto",
+      "resultado_real": "texto intacto: True",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 174,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc13_enmienda_con_motivo_conserva_el_original",
+      "que_se_verifica": "VC-13 (US13 éxito): el director médico agrega una nota de enmienda justificada.",
+      "resultado_esperado": "1 enmienda con autor, fecha y motivo; el texto original no cambia",
+      "resultado_real": "1 enmienda de Dr. Director: Omisión de dosis",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 175,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[Dr. Director-]",
+      "que_se_verifica": "VC-14 (RN-01 límite): enmienda con autor 'Dr. Director' y motivo ''.",
+      "resultado_esperado": "EnmiendaInvalida y ninguna enmienda registrada",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.8
+    },
+    {
+      "n": 176,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[-Omisi\\xf3n]",
+      "que_se_verifica": "VC-14 (RN-01 límite): enmienda con autor '' y motivo 'Omisión'.",
+      "resultado_esperado": "EnmiendaInvalida y ninguna enmienda registrada",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 177,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc14_enmienda_sin_autor_o_motivo[Dr. Director-   ]",
+      "que_se_verifica": "VC-14 (RN-01 límite): enmienda con autor 'Dr. Director' y motivo '   '.",
+      "resultado_esperado": "EnmiendaInvalida y ninguna enmienda registrada",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 178,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc15_enmienda_a_nota_sin_firmar_y_firma_incompleta",
+      "que_se_verifica": "VC-15 (RN-01 límite): no se enmienda una nota sin firmar; firmar sin cédula no vale.",
+      "resultado_esperado": "EnmiendaInvalida y ValueError",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 179,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc16_internar_en_jaula_libre",
+      "que_se_verifica": "VC-16 (US09 éxito): internar a la mascota 1 en la jaula J1.",
+      "resultado_esperado": "J1 ocupada y solo J2 libre",
+      "resultado_real": "jaulas libres: ['J2']",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 180,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc17_jaula_ocupada_o_mascota_ya_internada",
+      "que_se_verifica": "VC-17 (US09 error): usar una jaula ocupada, internar dos veces o una jaula que no existe.",
+      "resultado_esperado": "JaulaOcupada y ValueError",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 181,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc18_alta_con_las_dos_firmas_libera_la_jaula",
+      "que_se_verifica": "VC-18 (RN-06 éxito): alta médica del veterinario + precuenta confirmada en recepción.",
+      "resultado_esperado": "la jaula J1 queda libre y se devuelve la mascota 1",
+      "resultado_real": "mascota 1 egresada; libres ['J1', 'J2']",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    },
+    {
+      "n": 182,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[solo_medico]",
+      "que_se_verifica": "VC-19 (RN-06 límite): intento de alta con 'solo_medico'.",
+      "resultado_esperado": "AltaIncompleta y la jaula sigue ocupada",
+      "resultado_real": "AltaIncompleta: falta: confirmación de precuenta en recepción",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 183,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[solo_recepcion]",
+      "que_se_verifica": "VC-19 (RN-06 límite): intento de alta con 'solo_recepcion'.",
+      "resultado_esperado": "AltaIncompleta y la jaula sigue ocupada",
+      "resultado_real": "AltaIncompleta: falta: alta médica del veterinario",
+      "estado": "PASÓ",
+      "duracion_ms": 0.6
+    },
+    {
+      "n": 184,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc19_alta_con_una_sola_firma_no_libera[ninguna]",
+      "que_se_verifica": "VC-19 (RN-06 límite): intento de alta con 'ninguna'.",
+      "resultado_esperado": "AltaIncompleta y la jaula sigue ocupada",
+      "resultado_real": "AltaIncompleta: falta: alta médica del veterinario y confirmación de precuenta en recepción",
+      "estado": "PASÓ",
+      "duracion_ms": 0.5
+    },
+    {
+      "n": 185,
+      "modulo": "VetCare 24 (PIA): reglas de negocio del BRD (alergias, vacunas, expediente y alta)",
+      "prueba": "tests/test_vetcare_reglas.py::test_vc20_operar_sobre_jaula_vacia_o_inexistente",
+      "que_se_verifica": "VC-20 (RN-06 error): firmar alta en una jaula vacía o que no existe.",
+      "resultado_esperado": "ValueError",
+      "resultado_real": "Igual al esperado",
+      "estado": "PASÓ",
+      "duracion_ms": 0.4
+    }
+  ]
+}
