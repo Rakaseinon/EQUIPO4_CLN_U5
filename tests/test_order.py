@@ -1,4 +1,4 @@
-﻿"""Reglas del pedido (pruebas unitarias del dominio)"""
+"""Reglas del pedido (pruebas unitarias del dominio)"""
 
 import pytest
 
@@ -46,7 +46,7 @@ def test_vip_200_paga_170(resultado):
     pedido = Order(200, vip=True)
     cobro = pedido.confirm()
     resultado(f"cobro ${cobro:.2f}, descuento ${pedido.discount:.2f}")
-    assert cobro == 999
+    assert cobro == 170
     assert pedido.discount == 30
     assert pedido.status == "CONFIRMED"
 
